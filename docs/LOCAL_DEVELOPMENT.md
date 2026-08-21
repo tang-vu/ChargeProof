@@ -70,6 +70,7 @@ Contract artifacts and generated Hardhat types are build outputs and are not com
 
 ## Environment safety
 
-Copy `.env.example` only to ignored local environment files. Public `NEXT_PUBLIC_*` variables are
+Copy `.env.example` to an ignored root `.env` for deployment/worker commands and copy only the web
+variables to `apps/web/.env.local`. Public `NEXT_PUBLIC_*` variables are
 delivered to browsers; private keys must never use that prefix. The device signing endpoint reads its
 key only on the server, validates the receipt first, and fails closed when the key is absent.

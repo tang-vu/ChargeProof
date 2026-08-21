@@ -19,7 +19,8 @@
     "@nomicfoundation/hardhat-toolbox-mocha-ethers": "3.0.0",
     "@types/chai": "^5.2.2",
     "@types/mocha": "^10.0.10",
-    "chai": "^6.0.1",
+    "chai": "^5.2.2",
+    "dotenv": "17.2.3",
     "ethers": "6.17.0",
     "hardhat": "3.14.0",
     "viem": "2.55.19"

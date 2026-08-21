@@ -28,7 +28,7 @@ deployment and check code when metadata already describes one.
 
 ## 1. Deploy Sepolia source registry
 
-Provide these local environment variables:
+Copy `.env.example` to an ignored root `.env` and provide these local variables:
 
 ```text
 SEPOLIA_DEPLOYER_PRIVATE_KEY=<testnet burner only>
@@ -48,7 +48,7 @@ without claiming success until it is public.
 
 ## 2. Deploy Creditcoin contracts
 
-Provide:
+In the same ignored root `.env`, provide:
 
 ```text
 CREDITCOIN_DEPLOYER_PRIVATE_KEY=<testnet burner only>
@@ -70,7 +70,7 @@ Block Prover address other than `0x0000000000000000000000000000000000000FD2`.
 
 ## 3. Configure the web application
 
-Copy the public deployed addresses into an ignored `apps/web/.env.local` using the names in
+Copy the public deployed addresses into a separate ignored `apps/web/.env.local` using the names in
 `.env.example`. Add the server-only `DEVICE_SIMULATOR_PRIVATE_KEY`. The dashboard enables **Live
 testnet** only when every required address is syntactically valid.
 

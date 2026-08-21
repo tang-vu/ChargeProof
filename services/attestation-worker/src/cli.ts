@@ -3,7 +3,7 @@ import path from 'node:path';
 import process from 'node:process';
 import { setTimeout as delay } from 'node:timers/promises';
 
-import 'dotenv/config';
+import { config as loadEnvironment } from 'dotenv';
 
 import { ATTESTCOIN_PROVER_URL, CREDITCOIN_TESTNET_RPC, DEFAULT_SEPOLIA_RPC } from '@chargeproof/shared';
 
@@ -11,6 +11,8 @@ import { LiveAttestationPorts } from './live-ports.js';
 import { FileStateStore } from './state-store.js';
 import { submitReadyProof } from './submit.js';
 import { AttestationWorker } from './worker.js';
+
+loadEnvironment({ path: path.resolve(import.meta.dirname, '../../../.env'), quiet: true });
 
 const [command, transactionHash, ...flags] = process.argv.slice(2);
 

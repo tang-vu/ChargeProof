@@ -1,5 +1,9 @@
 import hardhatToolboxMochaEthersPlugin from '@nomicfoundation/hardhat-toolbox-mocha-ethers';
+import { config as loadEnvironment } from 'dotenv';
 import { configVariable, defineConfig } from 'hardhat/config';
+import path from 'node:path';
+
+loadEnvironment({ path: path.resolve(import.meta.dirname, '../../.env'), quiet: true });
 
 export default defineConfig({
   plugins: [hardhatToolboxMochaEthersPlugin],
