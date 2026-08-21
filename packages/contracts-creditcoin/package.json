@@ -8,7 +8,7 @@
     "compile": "hardhat compile",
     "deploy:creditcoin-testnet": "hardhat run scripts/deploy.ts --network creditcoinTestnet",
     "deploy:testnet": "hardhat run scripts/deploy.ts --network creditcoinTestnet",
-    "lint": "eslint hardhat.config.ts scripts test",
+    "lint": "hardhat compile && eslint hardhat.config.ts scripts test",
     "test": "hardhat test",
     "typecheck": "hardhat compile && tsc --noEmit"
   },

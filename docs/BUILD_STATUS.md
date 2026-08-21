@@ -20,6 +20,8 @@ Last updated: 2026-08-21
   prints or commits either key.
 - Polished ten-slide HTML deck rendered to a visually inspected 16:9 PDF.
 - Credential-free GitHub Actions workflow.
+- Clean-runner lint ordering hardened: each contract package compiles generated Hardhat types before
+  type-aware ESLint; the first public CI run exposed this local-cache dependency.
 
 ## In progress
 
