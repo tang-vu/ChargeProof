@@ -23,7 +23,8 @@ Last updated: 2026-08-21
 - Clean-runner lint ordering hardened: each contract package compiles generated Hardhat types before
   type-aware ESLint; the first public CI run exposed this local-cache dependency.
 - Public repository published at `https://github.com/tang-vu/ChargeProof`; credential-free CI passed
-  on clean Ubuntu runner: `https://github.com/tang-vu/ChargeProof/actions/runs/32470265426`.
+  on a clean Ubuntu runner for the Gate 2 automation milestone:
+  `https://github.com/tang-vu/ChargeProof/actions/runs/32472627378`.
 - Production Vercel dashboard deployed at `https://chargeproof-plum.vercel.app`, smoke-tested with
   HTTP 200 and an explicit `LOCAL SIMULATION` truth label. No local environment file was uploaded;
   the public GitHub repository is connected for subsequent builds.

@@ -21,10 +21,10 @@ Git-ignored local environment files. Both required native balances were zero whe
 
 ## Product evidence
 
-| Purpose          | Environment | URL                                                                              | Expected result                                    | What it proves                                  |
-| ---------------- | ----------- | -------------------------------------------------------------------------------- | -------------------------------------------------- | ----------------------------------------------- |
-| Hosted dashboard | Vercel      | [ChargeProof](https://chargeproof-plum.vercel.app)                               | HTTP 200; visible `LOCAL SIMULATION` badge         | Public responsive UI without deployment claims  |
-| Public CI        | GitHub      | [Quality gates](https://github.com/tang-vu/ChargeProof/actions/runs/32470265426) | Green clean-runner job; credential-free gates pass | Reproducibility outside the development machine |
+| Purpose          | Environment | URL                                                                              | Expected result                                        | What it proves                                  |
+| ---------------- | ----------- | -------------------------------------------------------------------------------- | ------------------------------------------------------ | ----------------------------------------------- |
+| Hosted dashboard | Vercel      | [ChargeProof](https://chargeproof-plum.vercel.app)                               | HTTP 200; visible `LOCAL SIMULATION` badge             | Public responsive UI without deployment claims  |
+| Public CI        | GitHub      | [Quality gates](https://github.com/tang-vu/ChargeProof/actions/runs/32472627378) | Green clean-runner job for the Gate 2 runner milestone | Reproducibility outside the development machine |
 
 ## Gate 2 — ChargeProof custom vertical slice
 
