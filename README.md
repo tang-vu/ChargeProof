@@ -159,6 +159,11 @@ Private variables are deliberately server/CLI-only:
 
 Use dedicated testnet-only wallets. Never paste a key into chat, frontend code, logs, or Git.
 
+After the dedicated deployer has gas on both testnets, the recommended resumable project-owned flow
+is `pnpm testnet:gate2`. It deploys both stacks idempotently, opens the intent, anchors the signed
+receipt, waits for Attestcoin, settles, submits an expected-failing replay, and writes public results
+to `deployments/gate2-evidence.json`. It never prints or persists either private key.
+
 ## Test and quality commands
 
 ```bash
@@ -170,6 +175,9 @@ pnpm test
 pnpm build
 pnpm secret:scan
 pnpm proof:resume -- 0xSOURCE_TRANSACTION
+pnpm wallets:status
+# Credentialed and state-changing on testnets only:
+pnpm testnet:gate2
 ```
 
 `docs/BUILD_STATUS.md` records commands actually run. Mocked unit tests replace only the native

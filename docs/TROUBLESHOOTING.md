@@ -50,6 +50,13 @@ status, source registry, selector, source sender, intent state, station/driver/t
 ID, amount, maximum escrow, and device signature. The worker's proof-ready state proves cryptographic
 readiness, not that a mismatched business receipt is payable.
 
+## The automated Gate 2 run stops
+
+Rerun `pnpm gate2:run`; do not create a second intent or source transaction manually. The runner
+reloads `worker-state/gate2.json`, checks recorded receipts, and resumes the exact pending phase. If it
+reports a stale intent before any `intentTransactionHash` exists, archive that one ignored state file
+and start a new run. Never delete state after any hash has been broadcast.
+
 ## Refund is too early
 
 Refund is available only after intent expiry plus 30 minutes. This grace period gives an already-ended

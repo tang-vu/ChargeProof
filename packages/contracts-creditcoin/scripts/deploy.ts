@@ -12,10 +12,12 @@ import type {
 } from '../types/ethers-contracts/index.js';
 
 const deploymentPath = path.resolve(import.meta.dirname, '../../../deployments/creditcoin-testnet.json');
+const sourceDeploymentPath = path.resolve(import.meta.dirname, '../../../deployments/sepolia.json');
 const blockProver = '0x0000000000000000000000000000000000000FD2';
 
 async function main() {
-  const sourceRegistry = requiredAddress('SEPOLIA_REGISTRY_ADDRESS');
+  const sourceRegistry =
+    optionalAddress('SEPOLIA_REGISTRY_ADDRESS') ?? (await sourceRegistryFromDeployment());
   const deviceSigner = requiredAddress('DEVICE_SIGNER_ADDRESS');
   const { ethers } = await network.create('creditcoinTestnet');
   const [deployer] = await ethers.getSigners();
@@ -142,6 +144,18 @@ function optionalAddress(name: string) {
   if (!value) return undefined;
   if (!isAddress(value)) throw new Error(`${name} must contain a valid public address`);
   return getAddress(value);
+}
+
+async function sourceRegistryFromDeployment() {
+  const parsed = JSON.parse(await readFile(sourceDeploymentPath, 'utf8')) as {
+    status?: unknown;
+    contracts?: { chargingSessionRegistry?: unknown };
+  };
+  const registry = parsed.contracts?.chargingSessionRegistry;
+  if (parsed.status !== 'deployed' || typeof registry !== 'string' || !isAddress(registry)) {
+    throw new Error('SEPOLIA_REGISTRY_ADDRESS is absent and deployments/sepolia.json has no live registry');
+  }
+  return getAddress(registry);
 }
 
 await main();

@@ -1,0 +1,6 @@
+{
+  "schemaVersion": 1,
+  "project": "ChargeProof",
+  "status": "not-run",
+  "note": "Populated atomically by pnpm testnet:gate2 after real project-owned transactions complete."
+}

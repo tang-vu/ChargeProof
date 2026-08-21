@@ -80,6 +80,11 @@ The SDK returns and the worker persists:
 The full proof is schema-validated with Zod and stored atomically in a per-transaction JSON file. A
 reload or new process resumes from the source hash rather than regenerating completed work.
 
+The credentialed `pnpm testnet:gate2` runner composes this same worker without bypassing any boundary.
+It persists the source hash before polling, calls `submitReadyProof` only after live `verifySingle`
+success, and then broadcasts the same proof with an explicit gas limit so the replay rejection is
+mined and explorer-verifiable rather than remaining only a failed gas estimate.
+
 ## Block Prover call
 
 The target contract implements the current official `INativeQueryVerifier` interface. It constructs

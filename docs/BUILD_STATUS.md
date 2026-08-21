@@ -27,6 +27,10 @@ Last updated: 2026-08-21
 - Production Vercel dashboard deployed at `https://chargeproof-plum.vercel.app`, smoke-tested with
   HTTP 200 and an explicit `LOCAL SIMULATION` truth label. No local environment file was uploaded;
   the public GitHub repository is connected for subsequent builds.
+- Resumable `pnpm testnet:gate2` automation now covers both deployments, MockUSDC funding/approval,
+  intent opening, deterministic device receipt, Sepolia anchor, real proof wait, settlement, mined
+  replay rejection, station metrics, and atomic public evidence output. It remains unexecuted because
+  both native gas balances are zero.
 
 ## In progress
 
@@ -72,7 +76,7 @@ Final credential-free run on 2026-08-21:
 | `pnpm test`                      | Passed: 24 tests (5 Sepolia, 8 Creditcoin, 6 worker, 3 shared, 2 web)          |
 | `pnpm integration:local`         | Passed source success, target escrow settlement, and worker state machine      |
 | `pnpm build`                     | Passed; contracts, shared, worker, and Next.js production build                |
-| `pnpm secret:scan`               | Passed for 99 repository files                                                 |
+| `pnpm secret:scan`               | Passed for 101 repository files                                                |
 | `pnpm audit --prod`              | No known vulnerabilities found                                                 |
 | Responsive visual inspection     | Desktop and 500 px mobile breakpoint inspected; narrow title uses fluid sizing |
 

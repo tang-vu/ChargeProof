@@ -16,6 +16,8 @@ Last updated: 2026-08-21
 - [x] Compile and test the canonical Sepolia session registry.
 - [x] Compile and test Creditcoin escrow, proof verifier, station registry, and MockUSDC.
 - [x] Finish the idempotent proof state machine and CLI.
+- [x] Add a resumable credentialed Gate 2 runner covering deploy, intent, source receipt, proof,
+      settlement, replay failure, metrics, and machine-readable evidence.
 - [x] Pass the local end-to-end flow with the accurate precompile mock.
 - [ ] Deploy to both testnets and record one successful settlement plus one rejected replay.
 
@@ -25,7 +27,8 @@ Last updated: 2026-08-21
 - [x] Complete threat model, operations docs, and troubleshooting.
 - [x] Complete README, deck, video runbook, judging matrix, submission copy, and checklist.
 - [x] Run all credential-free quality gates.
-- [x] Review and commit the final diff in logical local milestones; no push or publication.
+- [x] Publish the repository, pass clean-runner CI, render the deck PDF, and deploy the truth-labeled
+      dashboard to Vercel.
 
 ## Architecture decisions
 

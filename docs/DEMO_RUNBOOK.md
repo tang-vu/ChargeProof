@@ -12,6 +12,8 @@ path for normal attestation latency.
 - Prepare one new open intent and one previously completed real settlement.
 - Keep Sepolia and Creditcoin explorer tabs open to the relevant contract/transaction pages.
 - Verify the proof worker can resume the prepared source hash.
+- Prefer preparing the complete evidence set with `pnpm testnet:gate2`; it requires no browser import
+  of the local deployer key and resumes from persisted hashes.
 - Disable browser extensions and notifications unrelated to the demo.
 - Never show a terminal containing environment values.
 

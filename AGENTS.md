@@ -16,6 +16,9 @@
 Use pnpm only. Run `pnpm install`, `pnpm check`, or the narrower `pnpm lint`,
 `pnpm typecheck`, `pnpm test`, `pnpm compile`, and `pnpm build` commands.
 
+`pnpm wallets:status` is read-only. `pnpm testnet:gate2` is the credentialed, state-changing testnet
+runner; invoke it only with dedicated funded burners and preserve `worker-state/gate2.json` for resume.
+
 ## Security constraints
 
 - Testnets only. Never send a mainnet transaction.
@@ -26,6 +29,8 @@ Use pnpm only. Run `pnpm install`, `pnpm check`, or the narrower `pnpm lint`,
   ChargeProof business invariants in the target contract.
 - Only mock the `0x0FD2` precompile boundary in unit tests. Keep mock and live evidence separate.
 - Preserve unrelated user changes and never overwrite deployment metadata silently.
+- Gate 2 automation may print public addresses, hashes, proof counts, and explorer URLs only; it must
+  never serialize a private key into state or evidence.
 
 ## Definition of done
 

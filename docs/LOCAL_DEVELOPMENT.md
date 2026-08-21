@@ -2,8 +2,8 @@
 
 ## Prerequisites
 
-- Node.js 22 or newer
-- pnpm 10 or newer
+- Node.js 24.x
+- pnpm 11
 - Git
 
 The repository uses one pnpm lockfile, Hardhat 3, Solidity 0.8.28, TypeScript strict mode, Next.js App
@@ -55,6 +55,20 @@ current syntax.
 
 Proof submission is a separate command path and requires a Creditcoin testnet gas payer. The proof
 itself is public and settlement is permissionless.
+
+## Automated project-owned testnet flow
+
+After `pnpm wallets:status` reports gas on both testnets, run:
+
+```bash
+pnpm testnet:gate2
+```
+
+This credentialed command deploys both contract stacks if necessary and then resumes one persisted
+run in `worker-state/gate2.json`. Transaction hashes are saved immediately. Completion writes only
+public data to `deployments/gate2-evidence.json`, including explorer URLs, proof counts, settlement
+accounting, metrics, and the reverted replay receipt. Neither key is written to worker state or
+evidence.
 
 ## Package commands
 

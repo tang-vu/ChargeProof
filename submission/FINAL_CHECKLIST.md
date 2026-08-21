@@ -8,6 +8,7 @@
 - [x] Sepolia canonical receipt contract
 - [x] Creditcoin verifier, escrow, station registry, and demo token
 - [x] Resumable proof worker with diagnostics and retries
+- [x] Resumable credentialed Gate 2 runner and machine-readable evidence writer
 - [x] Responsive dashboard with explicit live/local modes
 - [x] Source/intent/device/amount/expiry/replay validation
 - [x] Unit tests mock only the native precompile boundary
