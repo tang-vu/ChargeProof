@@ -15,6 +15,9 @@ separated from project deployment evidence.
 
 **Submission deck:** [ChargeProof-Deck.pdf](submission/ChargeProof-Deck.pdf)
 
+**Live demo:** [chargeproof-plum.vercel.app](https://chargeproof-plum.vercel.app) — explicitly runs in
+`LOCAL SIMULATION` mode until project-owned testnet contracts are deployed.
+
 ## The real-world problem
 
 EV roaming joins drivers, charge point operators, mobility providers, and payment rails that do not
@@ -100,6 +103,7 @@ ChargeProof deployment metadata is machine-readable in
 | Official example destination transaction                       | Verified               | [Creditcoin transaction](https://creditcoin-testnet.blockscout.com/tx/0x7cc3a7333e9522f5921e6430bd59192caf7e1ce2382ae022879da93cd4ae9388) |
 | ChargeProof Sepolia registry                                   | Awaiting funded burner | See `deployments/sepolia.json`                                                                                                            |
 | ChargeProof Creditcoin contracts and custom settlement         | Awaiting funded burner | See `deployments/creditcoin-testnet.json`                                                                                                 |
+| Hosted dashboard                                               | Local simulation       | [Vercel production deployment](https://chargeproof-plum.vercel.app)                                                                       |
 
 The first three rows prove the current official protocol/tooling path, not a ChargeProof settlement.
 Project-specific evidence will be added only after explorer-verifiable deployment. See
@@ -122,7 +126,7 @@ Read the complete [threat model](docs/THREAT_MODEL.md) before treating this MVP 
 
 ## Local setup
 
-Requirements: Node.js 22+, pnpm 10+, and Git. No private key is required for local tests.
+Requirements: Node.js 24.x, pnpm 11, and Git. No private key is required for local tests.
 
 ```bash
 pnpm install --frozen-lockfile

@@ -22,6 +22,11 @@ Last updated: 2026-08-21
 - Credential-free GitHub Actions workflow.
 - Clean-runner lint ordering hardened: each contract package compiles generated Hardhat types before
   type-aware ESLint; the first public CI run exposed this local-cache dependency.
+- Public repository published at `https://github.com/tang-vu/ChargeProof`; credential-free CI passed
+  on clean Ubuntu runner: `https://github.com/tang-vu/ChargeProof/actions/runs/32470265426`.
+- Production Vercel dashboard deployed at `https://chargeproof-plum.vercel.app`, smoke-tested with
+  HTTP 200 and an explicit `LOCAL SIMULATION` truth label. No local environment file was uploaded;
+  the public GitHub repository is connected for subsequent builds.
 
 ## In progress
 
@@ -33,8 +38,7 @@ Last updated: 2026-08-21
 - ChargeProof Sepolia registry deployment, Creditcoin Testnet contract deployment, custom source
   transaction, custom proof, settlement, and replay evidence require dedicated funded burner wallets.
 - Contract source verification requires explorer support/API access after deployment.
-- Frontend hosting, deck PDF upload, and video recording/upload require hosting/media credentials or
-  a human recording session.
+- Video recording/upload requires a human recording session and media-hosting credentials.
 
 No private key, seed, or credential has been requested or exposed.
 
@@ -68,7 +72,7 @@ Final credential-free run on 2026-08-21:
 | `pnpm test`                      | Passed: 24 tests (5 Sepolia, 8 Creditcoin, 6 worker, 3 shared, 2 web)          |
 | `pnpm integration:local`         | Passed source success, target escrow settlement, and worker state machine      |
 | `pnpm build`                     | Passed; contracts, shared, worker, and Next.js production build                |
-| `pnpm secret:scan`               | Passed for 96 repository files                                                 |
+| `pnpm secret:scan`               | Passed for 99 repository files                                                 |
 | `pnpm audit --prod`              | No known vulnerabilities found                                                 |
 | Responsive visual inspection     | Desktop and 500 px mobile breakpoint inspected; narrow title uses fluid sizing |
 
@@ -91,6 +95,7 @@ pnpm wallets:create
 pnpm wallets:status
 pnpm check
 pnpm audit --prod
+npx --yes vercel@latest deploy --prod --yes --logs
 ```
 
 Live research also used read-only JSON-RPC, proof-service, SDK proof-builder, Chain Info, transaction

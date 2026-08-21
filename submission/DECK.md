@@ -135,4 +135,4 @@ meter receipts. Fast-track consideration is an opportunity, not guaranteed inves
 - Honest path from simulator to real infrastructure
 
 Team: `[NAME — ROLE]`<br>
-GitHub: `[REPOSITORY_URL]` · Demo: `[LIVE_DEMO_URL]`
+GitHub: `github.com/tang-vu/ChargeProof` · Demo: `chargeproof-plum.vercel.app`

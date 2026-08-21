@@ -1,0 +1,14 @@
+.env
+.env.*
+**/.env
+**/.env.*
+.vercel
+**/.next
+**/node_modules
+**/artifacts
+**/cache
+**/coverage
+**/dist
+**/types
+**/*.tsbuildinfo
+worker-state

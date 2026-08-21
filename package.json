@@ -6,7 +6,7 @@
   "license": "MIT",
   "packageManager": "pnpm@11.20.0",
   "engines": {
-    "node": ">=22.0.0"
+    "node": "24.x"
   },
   "scripts": {
     "build": "pnpm -r --if-present build",

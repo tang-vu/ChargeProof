@@ -58,10 +58,12 @@ between the Sepolia receipt and Creditcoin settlement.
 
 ## Links
 
-- GitHub Repository URL: `[REPOSITORY_URL]`
-- Project Deck/PDF URL: `[DECK_PDF_URL]`
+- GitHub Repository URL: `https://github.com/tang-vu/ChargeProof`
+- Project Deck/PDF URL:
+  `https://github.com/tang-vu/ChargeProof/blob/main/submission/ChargeProof-Deck.pdf`
 - Demo Video URL: `[DEMO_VIDEO_URL]`
-- Live Demo URL: `[LIVE_DEMO_URL]`
+- Live Demo URL: `https://chargeproof-plum.vercel.app` (currently labeled Local simulation; live
+  testnet mode activates only after Gate 2 deployment metadata exists)
 - Sepolia source contract: `[SEPOLIA_REGISTRY_EXPLORER_URL]`
 - Creditcoin escrow: `[CREDITCOIN_ESCROW_EXPLORER_URL]`
 - Creditcoin verifier: `[CREDITCOIN_VERIFIER_EXPLORER_URL]`

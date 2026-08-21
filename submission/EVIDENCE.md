@@ -19,6 +19,13 @@ The dedicated Gate 2 deployer is `0x33c7dE76ECCA5293D8d5Ee4aC6e8765213418267`. I
 Git-ignored local environment files. Both required native balances were zero when checked on
 2026-08-21, so no project-owned transaction is claimed below.
 
+## Product evidence
+
+| Purpose          | Environment | URL                                                                              | Expected result                                    | What it proves                                  |
+| ---------------- | ----------- | -------------------------------------------------------------------------------- | -------------------------------------------------- | ----------------------------------------------- |
+| Hosted dashboard | Vercel      | [ChargeProof](https://chargeproof-plum.vercel.app)                               | HTTP 200; visible `LOCAL SIMULATION` badge         | Public responsive UI without deployment claims  |
+| Public CI        | GitHub      | [Quality gates](https://github.com/tang-vu/ChargeProof/actions/runs/32470265426) | Green clean-runner job; credential-free gates pass | Reproducibility outside the development machine |
+
 ## Gate 2 — ChargeProof custom vertical slice
 
 | Purpose                   | Network            | Contract                   | Transaction hash   | Explorer URL | Expected result                              | Status                    |

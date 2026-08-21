@@ -50,10 +50,10 @@
 - [x] 2.5–3 minute exact video script
 - [x] Judging matrix and evidence schema
 - [x] Deck rendered to PDF
-- [ ] Deck PDF uploaded to a stable public URL
+- [x] Deck PDF uploaded to a stable public GitHub URL
 - [ ] Demo recorded and uploaded by a human
 - [x] Repository visibility confirmed public
-- [ ] Live frontend deployed with authorized hosting credentials
+- [x] Live frontend deployed with authorized hosting credentials and labeled Local simulation
 - [ ] Team names, bios, and all URL placeholders filled
 - [ ] DoraHacks form reviewed and submitted before 2026-09-06 23:59 ET
 

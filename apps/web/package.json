@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "next build",
+    "build": "pnpm --filter @chargeproof/shared build && pnpm --filter @chargeproof/attestation-worker build && next build",
     "dev": "next dev",
     "lint": "eslint app components lib",
     "start": "next start",
