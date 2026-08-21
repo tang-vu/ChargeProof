@@ -13,6 +13,8 @@ escrow is credited back to the driver.
 deployments still require funded burner wallets. Official-protocol proof-spike evidence is clearly
 separated from project deployment evidence.
 
+**Submission deck:** [ChargeProof-Deck.pdf](submission/ChargeProof-Deck.pdf)
+
 ## The real-world problem
 
 EV roaming joins drivers, charge point operators, mobility providers, and payment rails that do not
@@ -136,6 +138,9 @@ pnpm --filter @chargeproof/web dev
 Copy `.env.example` to a local `.env.local` only when using testnets. Never commit it. See
 [Local development](docs/LOCAL_DEVELOPMENT.md) for the local simulation and
 [Testnet deployment](docs/TESTNET_DEPLOYMENT.md) for burner-wallet steps.
+
+For a new dedicated testnet burner set, `pnpm wallets:create` writes only Git-ignored environment
+files and prints public addresses only. `pnpm wallets:status` performs a read-only balance check.
 
 ## Environment configuration
 

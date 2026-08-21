@@ -19,4 +19,14 @@ export default tseslint.config(
       '@typescript-eslint/no-floating-promises': 'error',
     },
   },
+  {
+    ...tseslint.configs.disableTypeChecked,
+    files: ['*.mjs', 'scripts/*.mjs'],
+    languageOptions: {
+      ...tseslint.configs.disableTypeChecked.languageOptions,
+      globals: {
+        process: 'readonly',
+      },
+    },
+  },
 );

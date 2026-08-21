@@ -10,7 +10,7 @@ const patterns = [
   /-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/,
   /(?:PRIVATE_KEY|MNEMONIC|SECRET)\s*[=:]\s*["']?(?:0x)?[a-fA-F0-9]{64}["']?/,
   /(?:MNEMONIC|SEED_PHRASE)\s*[=:]\s*["'][a-z]+(?:\s+[a-z]+){11,23}["']/i,
-  /(?:sk_live_|AKIA|ghp_|github_pat_)[A-Za-z0-9_\-]{16,}/,
+  /(?:sk_live_|AKIA|ghp_|github_pat_)[A-Za-z0-9_-]{16,}/,
 ];
 const findings = [];
 
