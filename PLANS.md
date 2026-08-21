@@ -25,7 +25,7 @@ Last updated: 2026-08-21
 - [x] Complete threat model, operations docs, and troubleshooting.
 - [x] Complete README, deck, video runbook, judging matrix, submission copy, and checklist.
 - [x] Run all credential-free quality gates.
-- [ ] Review and commit the final diff.
+- [x] Review and commit the final diff in logical local milestones; no push or publication.
 
 ## Architecture decisions
 
