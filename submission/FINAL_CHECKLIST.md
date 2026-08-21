@@ -26,7 +26,7 @@
 - [x] Local integration smoke test recorded
 - [x] Secret scan recorded
 - [x] Final diff/security review recorded
-- [x] Git milestone commits created; no push or publication
+- [x] Git milestone commits created
 
 ## Evidence
 
@@ -46,12 +46,13 @@
 - [x] Architecture and threat model
 - [x] Deployment, demo, troubleshooting, limitations, and CEIP docs
 - [x] Copy-ready submission text
-- [x] Ten-slide deck source
+- [x] Ten-slide deck source and visually inspected 16:9 PDF
 - [x] 2.5–3 minute exact video script
 - [x] Judging matrix and evidence schema
-- [ ] Deck rendered to PDF and uploaded by a human
+- [x] Deck rendered to PDF
+- [ ] Deck PDF uploaded to a stable public URL
 - [ ] Demo recorded and uploaded by a human
-- [ ] Repository made public by an authorized human
+- [x] Repository visibility confirmed public
 - [ ] Live frontend deployed with authorized hosting credentials
 - [ ] Team names, bios, and all URL placeholders filled
 - [ ] DoraHacks form reviewed and submitted before 2026-09-06 23:59 ET

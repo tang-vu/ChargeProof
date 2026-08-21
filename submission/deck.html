@@ -1,0 +1,828 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ChargeProof — BUIDL CTC 2026 Fall</title>
+    <style>
+      :root {
+        --ink: #eefcff;
+        --muted: #8aa7b2;
+        --cyan: #16e5ff;
+        --lime: #b8ff3d;
+        --navy: #050d15;
+        --panel: #0a1722;
+        --line: #183445;
+        --danger: #ff6b73;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        background: #02070c;
+        color: var(--ink);
+        font-family: Inter, 'Segoe UI', Arial, sans-serif;
+      }
+
+      @page {
+        size: 16in 9in;
+        margin: 0;
+      }
+
+      .slide {
+        position: relative;
+        width: 16in;
+        height: 9in;
+        padding: 0.62in 0.78in;
+        overflow: hidden;
+        page-break-after: always;
+        background:
+          linear-gradient(rgba(22, 229, 255, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(22, 229, 255, 0.035) 1px, transparent 1px),
+          radial-gradient(circle at 88% 12%, rgba(22, 229, 255, 0.11), transparent 28%), var(--navy);
+        background-size:
+          0.34in 0.34in,
+          0.34in 0.34in,
+          auto,
+          auto;
+      }
+
+      .slide:last-child {
+        page-break-after: auto;
+      }
+
+      .eyebrow,
+      .network,
+      .step,
+      .status,
+      .kicker {
+        font-family: 'Cascadia Mono', Consolas, monospace;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+      }
+
+      .eyebrow {
+        color: var(--cyan);
+        font-size: 0.17in;
+        font-weight: 700;
+      }
+
+      h1 {
+        max-width: 11.8in;
+        margin: 0.18in 0 0.22in;
+        font-size: 0.72in;
+        line-height: 0.98;
+        letter-spacing: -0.045em;
+      }
+
+      h2 {
+        margin: 0.14in 0 0.35in;
+        font-size: 0.53in;
+        line-height: 1.05;
+        letter-spacing: -0.035em;
+      }
+
+      h3 {
+        margin: 0 0 0.12in;
+        color: var(--ink);
+        font-size: 0.25in;
+      }
+
+      p,
+      li {
+        font-size: 0.25in;
+        line-height: 1.43;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 0.28in;
+      }
+
+      li {
+        margin-bottom: 0.16in;
+        padding-left: 0.05in;
+      }
+
+      li::marker {
+        color: var(--lime);
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+
+      .cyan {
+        color: var(--cyan);
+      }
+
+      .lime {
+        color: var(--lime);
+      }
+
+      .grid-2,
+      .grid-3,
+      .grid-4 {
+        display: grid;
+        gap: 0.24in;
+      }
+
+      .grid-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .grid-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .grid-4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .panel {
+        padding: 0.27in;
+        border: 1px solid var(--line);
+        border-radius: 0.14in;
+        background: linear-gradient(145deg, rgba(12, 30, 43, 0.96), rgba(6, 18, 28, 0.92));
+      }
+
+      .panel.accent {
+        border-color: rgba(22, 229, 255, 0.55);
+        box-shadow: inset 0 0 0.3in rgba(22, 229, 255, 0.035);
+      }
+
+      .panel.lime-accent {
+        border-color: rgba(184, 255, 61, 0.55);
+      }
+
+      .metric {
+        margin: 0.08in 0;
+        color: var(--lime);
+        font-family: 'Cascadia Mono', Consolas, monospace;
+        font-size: 0.43in;
+        font-weight: 750;
+      }
+
+      .footer {
+        position: absolute;
+        right: 0.78in;
+        bottom: 0.28in;
+        left: 0.78in;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #64818d;
+        font-family: 'Cascadia Mono', Consolas, monospace;
+        font-size: 0.14in;
+        letter-spacing: 0.04em;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.1in;
+      }
+
+      .brand-mark {
+        width: 0.19in;
+        height: 0.19in;
+        border: 2px solid var(--cyan);
+        border-right-color: var(--lime);
+        border-radius: 50%;
+        box-shadow: 0 0 0.12in rgba(22, 229, 255, 0.35);
+      }
+
+      .hero-copy {
+        width: 10.7in;
+        margin-top: 0.72in;
+      }
+
+      .hero-copy h1 {
+        font-size: 1.08in;
+      }
+
+      .tagline {
+        max-width: 10.7in;
+        color: #bfd3db;
+        font-size: 0.36in;
+        line-height: 1.4;
+      }
+
+      .pulse {
+        position: absolute;
+        top: 1.3in;
+        right: 0.9in;
+        width: 3.6in;
+        height: 6.2in;
+      }
+
+      .pulse::before {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 3.25in;
+        height: 3.25in;
+        border: 1px solid rgba(22, 229, 255, 0.5);
+        border-radius: 50%;
+        box-shadow:
+          0 0 0 0.28in rgba(22, 229, 255, 0.04),
+          0 0 0 0.56in rgba(22, 229, 255, 0.025);
+        content: '';
+      }
+
+      .pulse-line {
+        position: absolute;
+        top: 1.61in;
+        right: 0.65in;
+        width: 3.8in;
+        height: 0.04in;
+        background: linear-gradient(90deg, transparent, var(--cyan), var(--lime));
+        box-shadow: 0 0 0.16in var(--cyan);
+      }
+
+      .pulse-nodes {
+        position: absolute;
+        top: 4.2in;
+        right: 0;
+        display: grid;
+        width: 3.4in;
+        gap: 0.16in;
+      }
+
+      .node {
+        padding: 0.16in 0.2in;
+        border: 1px solid var(--line);
+        border-left: 3px solid var(--cyan);
+        background: rgba(5, 13, 21, 0.85);
+        color: #a9c4ce;
+        font-family: 'Cascadia Mono', Consolas, monospace;
+        font-size: 0.16in;
+      }
+
+      .bottom-line {
+        margin-top: 0.28in;
+        padding: 0.24in 0.3in;
+        border-left: 4px solid var(--lime);
+        background: rgba(184, 255, 61, 0.055);
+        font-size: 0.29in;
+        font-weight: 650;
+      }
+
+      .no-path {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.25in;
+        height: 1.65in;
+        margin-bottom: 0.35in;
+        font-family: 'Cascadia Mono', Consolas, monospace;
+      }
+
+      .chain-box {
+        min-width: 2.65in;
+        padding: 0.25in;
+        border: 1px solid var(--cyan);
+        border-radius: 0.12in;
+        text-align: center;
+        font-size: 0.23in;
+      }
+
+      .broken-link {
+        color: var(--danger);
+        font-size: 0.48in;
+        font-weight: 800;
+      }
+
+      .flow {
+        display: grid;
+        grid-template-columns: 1fr 0.18in 1fr 0.18in 1fr 0.18in 1fr 0.18in 1fr;
+        align-items: stretch;
+        gap: 0.08in;
+        margin-top: 0.35in;
+      }
+
+      .flow-card {
+        min-height: 2.55in;
+        padding: 0.22in;
+        border: 1px solid var(--line);
+        border-radius: 0.14in;
+        background: var(--panel);
+      }
+
+      .flow-card .step {
+        margin-bottom: 0.16in;
+        color: var(--cyan);
+        font-size: 0.14in;
+      }
+
+      .flow-card p {
+        color: #aac0c9;
+        font-size: 0.19in;
+      }
+
+      .arrow {
+        align-self: center;
+        color: var(--lime);
+        font-size: 0.34in;
+        text-align: center;
+      }
+
+      .equation {
+        margin-top: 0.35in;
+        padding: 0.26in;
+        border: 1px solid rgba(184, 255, 61, 0.42);
+        border-radius: 0.12in;
+        color: var(--lime);
+        background: rgba(184, 255, 61, 0.05);
+        font-family: 'Cascadia Mono', Consolas, monospace;
+        font-size: 0.29in;
+        text-align: center;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.2in;
+      }
+
+      th,
+      td {
+        padding: 0.18in 0.2in;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+
+      th {
+        color: var(--cyan);
+        font-family: 'Cascadia Mono', Consolas, monospace;
+        font-size: 0.15in;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      td {
+        color: #b8cdd5;
+      }
+
+      .status {
+        display: inline-block;
+        padding: 0.07in 0.12in;
+        border: 1px solid #735a27;
+        border-radius: 0.2in;
+        color: #ffcf68;
+        background: rgba(255, 196, 71, 0.06);
+        font-size: 0.13in;
+      }
+
+      .proof-stack {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 0.32in;
+      }
+
+      .proof-code {
+        padding: 0.3in;
+        border: 1px solid rgba(22, 229, 255, 0.45);
+        border-radius: 0.14in;
+        background: #02090e;
+        font-family: 'Cascadia Mono', Consolas, monospace;
+      }
+
+      .proof-code .line {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.13in 0;
+        border-bottom: 1px solid #112633;
+        color: #95aeb8;
+        font-size: 0.17in;
+      }
+
+      .proof-code .line:last-child {
+        border-bottom: 0;
+      }
+
+      .proof-code strong {
+        color: var(--lime);
+      }
+
+      .defense {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.1in;
+        margin-top: 0.25in;
+      }
+
+      .defense span {
+        padding: 0.08in 0.13in;
+        border: 1px solid #24485b;
+        border-radius: 0.18in;
+        color: #afc6cf;
+        font-family: 'Cascadia Mono', Consolas, monospace;
+        font-size: 0.135in;
+      }
+
+      .roadmap {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.27in;
+        margin-top: 0.42in;
+      }
+
+      .roadmap .panel {
+        min-height: 3.3in;
+      }
+
+      .kicker {
+        margin-bottom: 0.18in;
+        color: var(--lime);
+        font-size: 0.14in;
+      }
+
+      .closing {
+        display: flex;
+        height: 5.8in;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .closing h1 {
+        max-width: 13in;
+        font-size: 0.85in;
+      }
+
+      .closing p {
+        color: #b5cbd4;
+        font-size: 0.31in;
+      }
+
+      .closing-links {
+        margin-top: 0.42in;
+        color: var(--cyan);
+        font-family: 'Cascadia Mono', Consolas, monospace;
+        font-size: 0.18in;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="slide">
+      <div class="hero-copy">
+        <div class="eyebrow">BUIDL CTC 2026 FALL · DePIN</div>
+        <h1>Charge<span class="cyan">Proof</span></h1>
+        <p class="tagline">Trustless cross-chain EV charging settlement.</p>
+        <div class="bottom-line">
+          A station gets paid only when a cryptographically verified charging receipt matches the driver's
+          escrowed intent.
+        </div>
+      </div>
+      <div class="pulse">
+        <div class="pulse-line"></div>
+        <div class="pulse-nodes">
+          <div class="node">01 · METERED ENERGY</div>
+          <div class="node">02 · ATTESTED RECEIPT</div>
+          <div class="node">03 · BOUNDED PAYMENT</div>
+        </div>
+      </div>
+      <div class="footer">
+        <span class="brand"><i class="brand-mark"></i> CHARGEPROOF</span><span>01 / 10</span>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="eyebrow">The problem</div>
+      <h2>EV charging has a settlement gap.</h2>
+      <div class="grid-3">
+        <article class="panel accent">
+          <h3>Fragmented records</h3>
+          <p class="muted">
+            Drivers, charge-point operators, roaming providers, and payment systems reconcile separate
+            ledgers.
+          </p>
+        </article>
+        <article class="panel">
+          <h3>Relayers are assertions</h3>
+          <p class="muted">A transaction on chain A cannot natively authorize escrow release on chain B.</p>
+        </article>
+        <article class="panel lime-accent">
+          <h3>Both sides need bounds</h3>
+          <p class="muted">
+            Operators need auditable payment. Drivers need capped authorization and automatic refunds.
+          </p>
+        </article>
+      </div>
+      <div class="bottom-line">
+        Shared settlement needs authenticated usage evidence—not another reconciliation file.
+      </div>
+      <div class="footer">
+        <span class="brand"><i class="brand-mark"></i> CHARGEPROOF</span><span>02 / 10</span>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="eyebrow">The missing primitive</div>
+      <h2>Blockchain alone is not cross-chain verification.</h2>
+      <div class="no-path">
+        <div class="chain-box">SEPOLIA<br /><span class="muted">charging receipt</span></div>
+        <div class="broken-link">— × —</div>
+        <div class="chain-box">CREDITCOIN<br /><span class="muted">payment escrow</span></div>
+      </div>
+      <div class="grid-3">
+        <div class="panel">
+          <h3>Authenticity</h3>
+          <p class="muted">Creditcoin needs cryptographic evidence of that exact source transaction.</p>
+        </div>
+        <div class="panel">
+          <h3>Semantics</h3>
+          <p class="muted">
+            Inclusion alone is insufficient; destination business rules must be revalidated.
+          </p>
+        </div>
+        <div class="panel">
+          <h3>Minimized trust</h3>
+          <p class="muted">A privileged relayer merely moves the reconciliation trust assumption.</p>
+        </div>
+      </div>
+      <div class="footer">
+        <span class="brand"><i class="brand-mark"></i> CHARGEPROOF</span><span>03 / 10</span>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="eyebrow">The solution</div>
+      <h2>One evidence-bound payment.</h2>
+      <div class="flow">
+        <div class="flow-card">
+          <div class="step">01 · Intent</div>
+          <h3>Bounded escrow</h3>
+          <p>Driver caps spend and fixes station, tariff, expiry, source chain, and registry.</p>
+        </div>
+        <div class="arrow">›</div>
+        <div class="flow-card">
+          <div class="step">02 · Meter</div>
+          <h3>Signed receipt</h3>
+          <p>Authorized device signs deterministic EIP-712 energy and price data.</p>
+        </div>
+        <div class="arrow">›</div>
+        <div class="flow-card">
+          <div class="step">03 · Anchor</div>
+          <h3>Canonical call</h3>
+          <p>Driver finalizes the receipt in the Sepolia source registry.</p>
+        </div>
+        <div class="arrow">›</div>
+        <div class="flow-card">
+          <div class="step">04 · Prove</div>
+          <h3>Attestcoin</h3>
+          <p>Inclusion and continuity authenticate the successful transaction.</p>
+        </div>
+        <div class="arrow">›</div>
+        <div class="flow-card">
+          <div class="step">05 · Settle</div>
+          <h3>Pay + refund</h3>
+          <p>Operator receives actual cost; unused escrow becomes driver credit.</p>
+        </div>
+      </div>
+      <div class="equation">operator payment = ceil(energyWh × tariff / 1000) ≤ max escrow</div>
+      <div class="footer">
+        <span class="brand"><i class="brand-mark"></i> CHARGEPROOF</span><span>04 / 10</span>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="eyebrow">Architecture</div>
+      <h2>Attestcoin closes the verification loop.</h2>
+      <div class="flow">
+        <div class="flow-card">
+          <div class="step">Creditcoin</div>
+          <h3>Intent escrow</h3>
+          <p>MockUSDC funding, immutable intent constraints, refunds.</p>
+        </div>
+        <div class="arrow">›</div>
+        <div class="flow-card">
+          <div class="step">Device MVP</div>
+          <h3>Meter receipt</h3>
+          <p>Hardware simulator and authorized EIP-712 signer.</p>
+        </div>
+        <div class="arrow">›</div>
+        <div class="flow-card">
+          <div class="step">Sepolia</div>
+          <h3>Source registry</h3>
+          <p>Canonical selector, driver sender, successful execution.</p>
+        </div>
+        <div class="arrow">›</div>
+        <div class="flow-card accent">
+          <div class="step">Attestcoin</div>
+          <h3>Proof layer</h3>
+          <p>ProofBuilder, inclusion siblings, continuity roots, Block Prover.</p>
+        </div>
+        <div class="arrow">›</div>
+        <div class="flow-card">
+          <div class="step">Creditcoin</div>
+          <h3>Verifier</h3>
+          <p>Decode, validate, replay-protect, settle, update metrics.</p>
+        </div>
+      </div>
+      <div class="bottom-line">
+        Four custom contracts · one resumable worker · one evidence-first dashboard · no bridge custody
+      </div>
+      <div class="footer">
+        <span class="brand"><i class="brand-mark"></i> CHARGEPROOF</span><span>05 / 10</span>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="eyebrow">Evidence</div>
+      <h2>Built to be verified, not merely narrated.</h2>
+      <div style="margin-bottom: 0.22in">
+        <span class="status">ChargeProof deployment pending funded testnet burners</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Evidence</th>
+            <th>Network</th>
+            <th>Expected explorer result</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Funded charging intent</td>
+            <td>Creditcoin Testnet</td>
+            <td>IntentOpened + escrow balance</td>
+            <td>Pending gas</td>
+          </tr>
+          <tr>
+            <td>Device receipt</td>
+            <td>Ethereum Sepolia</td>
+            <td>Successful canonical finalizeSession</td>
+            <td>Pending gas</td>
+          </tr>
+          <tr>
+            <td>Attestcoin proof</td>
+            <td>Proof service + Block Prover</td>
+            <td>Inclusion + continuity accepted</td>
+            <td>Pending source tx</td>
+          </tr>
+          <tr>
+            <td>Settlement</td>
+            <td>Creditcoin Testnet</td>
+            <td>Operator credit + driver refund + metrics</td>
+            <td>Pending proof</td>
+          </tr>
+          <tr>
+            <td>Replay attempt</td>
+            <td>Creditcoin Testnet</td>
+            <td>Expected custom-error revert; no state change</td>
+            <td>Pending settlement</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="bottom-line">
+        Gate 1 already proved current SDK → proof service → live Block Prover compatibility using attributed
+        official-example evidence.
+      </div>
+      <div class="footer">
+        <span class="brand"><i class="brand-mark"></i> CHARGEPROOF</span><span>06 / 10</span>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="eyebrow">Integration depth</div>
+      <h2>Attestcoin is indispensable.</h2>
+      <div class="proof-stack">
+        <div class="proof-code">
+          <div class="line"><span>source chain key</span><strong>1 · Sepolia</strong></div>
+          <div class="line"><span>SDK</span><strong>ProofBuilder.getProof</strong></div>
+          <div class="line"><span>proof</span><strong>transaction + siblings + roots</strong></div>
+          <div class="line"><span>target verifier</span><strong>native 0x…0FD2</strong></div>
+          <div class="line"><span>settlement path without proof</span><strong>impossible</strong></div>
+        </div>
+        <div class="panel accent">
+          <h3>Destination defense in depth</h3>
+          <p class="muted">
+            After cryptographic verification, ChargeProof still decodes and checks every business-critical
+            field.
+          </p>
+          <div class="defense">
+            <span>status</span><span>chain</span><span>source</span><span>selector</span><span>sender</span
+            ><span>device</span><span>intent</span><span>tariff</span><span>amount</span><span>expiry</span
+            ><span>3× replay</span>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-line">
+        Remove Attestcoin and Creditcoin has no authenticated Sepolia input—settlement cannot execute.
+      </div>
+      <div class="footer">
+        <span class="brand"><i class="brand-mark"></i> CHARGEPROOF</span><span>07 / 10</span>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="eyebrow">Security</div>
+      <h2>Trust boundaries are explicit.</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Boundary</th>
+            <th>What ChargeProof guarantees</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cyan">Physical</td>
+            <td>Authorized device signature for the MVP—not proof of electricity by Attestcoin.</td>
+          </tr>
+          <tr>
+            <td class="cyan">Source</td>
+            <td>Expected driver call and successful canonical contract execution.</td>
+          </tr>
+          <tr>
+            <td class="cyan">Cross-chain</td>
+            <td>Attestcoin transaction inclusion and continuity verification.</td>
+          </tr>
+          <tr>
+            <td class="cyan">Destination</td>
+            <td>Full semantic validation before escrow state changes.</td>
+          </tr>
+          <tr>
+            <td class="cyan">Payment</td>
+            <td>Pull credits isolate token transfers; terminal states conserve escrow.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="bottom-line">
+        24 automated tests cover tampering, mismatch, invalid proof, expiry, overcharge, replay, refunds,
+        authorization, accounting, and reentrancy.
+      </div>
+      <div class="footer">
+        <span class="brand"><i class="brand-mark"></i> CHARGEPROOF</span><span>08 / 10</span>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="eyebrow">CEIP path</div>
+      <h2>From EV pilot to a reusable DePIN rail.</h2>
+      <div class="roadmap">
+        <article class="panel accent">
+          <div class="kicker">Next · Prove</div>
+          <h3>Physical pilot</h3>
+          <ul>
+            <li>Secure-element device keys</li>
+            <li>OCPP / OCPI integration</li>
+            <li>Independent security audit</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <div class="kicker">Then · Productize</div>
+          <h3>Operator SDK</h3>
+          <ul>
+            <li>Versioned receipt interface</li>
+            <li>Roaming interoperability</li>
+            <li>Production payment asset</li>
+          </ul>
+        </article>
+        <article class="panel lime-accent">
+          <div class="kicker">Expand · Standardize</div>
+          <h3>Metered infrastructure</h3>
+          <ul>
+            <li>Solar microgrids</li>
+            <li>Telecom hotspots</li>
+            <li>Battery swapping</li>
+          </ul>
+        </article>
+      </div>
+      <div class="bottom-line">
+        CEIP candidate: a reusable Creditcoin settlement interface for authenticated external-chain meter
+        receipts.
+      </div>
+      <div class="footer">
+        <span class="brand"><i class="brand-mark"></i> CHARGEPROOF</span><span>09 / 10</span>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="closing">
+        <div class="eyebrow">Close the loop</div>
+        <h1>
+          Metered service <span class="cyan">→</span> authenticated transaction
+          <span class="lime">→</span> bounded payment
+        </h1>
+        <p>Original DePIN vertical slice · Attestcoin at the center · explorer-verifiable · replay-safe</p>
+        <div class="closing-links">github.com/tang-vu/ChargeProof · BUIDL CTC 2026 Fall</div>
+      </div>
+      <div class="footer">
+        <span class="brand"><i class="brand-mark"></i> CHARGEPROOF</span><span>10 / 10</span>
+      </div>
+    </section>
+  </body>
+</html>
