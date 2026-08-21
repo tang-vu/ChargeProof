@@ -1,0 +1,27 @@
+{
+  "name": "@chargeproof/contracts-sepolia",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "hardhat compile",
+    "compile": "hardhat compile",
+    "deploy:sepolia": "hardhat run scripts/deploy.ts --network sepolia",
+    "deploy:testnet": "hardhat run scripts/deploy.ts --network sepolia",
+    "lint": "eslint hardhat.config.ts scripts test",
+    "test": "hardhat test",
+    "typecheck": "hardhat compile && tsc --noEmit"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "5.4.0"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox-mocha-ethers": "3.0.0",
+    "@types/chai": "^5.2.2",
+    "@types/mocha": "^10.0.10",
+    "chai": "^6.0.1",
+    "ethers": "6.17.0",
+    "hardhat": "3.14.0",
+    "viem": "2.55.19"
+  }
+}

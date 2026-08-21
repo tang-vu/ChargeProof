@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "project": "ChargeProof",
+  "status": "not-deployed",
+  "network": "ethereum-sepolia",
+  "chainId": 11155111,
+  "contracts": {},
+  "note": "Populate only through the idempotent deployment script after a funded burner signs."
+}

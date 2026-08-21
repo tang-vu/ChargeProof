@@ -1,0 +1,35 @@
+{
+  "name": "@chargeproof/attestation-worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "bin": {
+    "chargeproof-attestation": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "lint": "eslint src test",
+    "proof:inspect": "tsx src/cli.ts inspect",
+    "proof:resume": "tsx src/cli.ts resume",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@chargeproof/shared": "workspace:*",
+    "@gluwa/usc-sdk": "0.18.0",
+    "dotenv": "17.2.3",
+    "ethers": "6.17.0",
+    "viem": "2.55.19",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "tsx": "4.23.12",
+    "vitest": "4.1.11"
+  }
+}

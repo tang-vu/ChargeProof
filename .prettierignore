@@ -1,0 +1,7 @@
+.next
+artifacts
+cache
+coverage
+node_modules
+pnpm-lock.yaml
+public

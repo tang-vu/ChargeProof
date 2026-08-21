@@ -1,0 +1,17 @@
+packages:
+  - apps/*
+  - packages/*
+  - services/*
+
+allowBuilds:
+  '@nomicfoundation/edr': true
+  esbuild: true
+  sharp: true
+
+minimumReleaseAgeExclude:
+  - hardhat@3.14.0
+
+onlyBuiltDependencies:
+  - '@nomicfoundation/edr'
+  - esbuild
+  - sharp

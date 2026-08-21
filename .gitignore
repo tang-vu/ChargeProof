@@ -1,0 +1,32 @@
+node_modules/
+.pnpm-store/
+.next/
+out/
+dist/
+coverage/
+artifacts/
+cache/
+typechain-types/
+packages/*/types/
+*.tsbuildinfo
+.turbo/
+
+# Secrets and local state
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.keystore
+*.mnemonic
+worker-state/
+
+# Deployment scratch files are never evidence
+deployments/*.local.json
+deployments/*.tmp.json
+
+# Editors and operating systems
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

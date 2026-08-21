@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "project": "ChargeProof",
+  "status": "not-deployed",
+  "network": "creditcoin-testnet",
+  "chainId": 102031,
+  "contracts": {},
+  "note": "Populate only through the idempotent deployment script after a funded burner signs."
+}
