@@ -1,6 +1,6 @@
 # ChargeProof execution plan
 
-Last updated: 2026-08-21
+Last updated: 2026-08-22
 
 ## Gate 1 — official proof spike
 
@@ -9,7 +9,7 @@ Last updated: 2026-08-21
 - [x] Verify live Creditcoin chain info: Sepolia chain key `1`, chain ID `11155111`.
 - [x] Regenerate a real proof for the official Sepolia example transaction.
 - [x] Verify the proof through the live Creditcoin Testnet Block Prover precompile using `eth_call`.
-- [ ] Send a new ChargeProof-owned Sepolia transaction (blocked until a funded burner signs).
+- [x] Send and prove a new ChargeProof-owned Sepolia transaction.
 
 ## Gate 2 — ChargeProof vertical slice
 
@@ -19,7 +19,7 @@ Last updated: 2026-08-21
 - [x] Add a resumable credentialed Gate 2 runner covering deploy, intent, source receipt, proof,
       settlement, replay failure, metrics, and machine-readable evidence.
 - [x] Pass the local end-to-end flow with the accurate precompile mock.
-- [ ] Deploy to both testnets and record one successful settlement plus one rejected replay.
+- [x] Deploy to both testnets and record one successful settlement plus one rejected replay.
 
 ## Product and submission
 
@@ -29,6 +29,8 @@ Last updated: 2026-08-21
 - [x] Run all credential-free quality gates.
 - [x] Publish the repository, pass clean-runner CI, render the deck PDF, and deploy the truth-labeled
       dashboard to Vercel.
+- [x] Seed the dashboard, deck, runbook, and submission materials with project-owned Gate 2 evidence.
+- [ ] Record/upload the demo video and add human team identity before DoraHacks submission.
 
 ## Architecture decisions
 

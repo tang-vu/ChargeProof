@@ -1,6 +1,6 @@
 # Build status
 
-Last updated: 2026-08-21
+Last updated: 2026-08-22
 
 ## Completed
 
@@ -25,25 +25,30 @@ Last updated: 2026-08-21
 - Public repository published at `https://github.com/tang-vu/ChargeProof`; credential-free CI passed
   on a clean Ubuntu runner for the Gate 2 automation milestone:
   `https://github.com/tang-vu/ChargeProof/actions/runs/32472627378`.
-- Production Vercel dashboard deployed at `https://chargeproof-plum.vercel.app`, smoke-tested with
-  HTTP 200 and an explicit `LOCAL SIMULATION` truth label. No local environment file was uploaded;
-  the public GitHub repository is connected for subsequent builds.
+- Production Vercel dashboard deployed at `https://chargeproof-plum.vercel.app`; the public GitHub
+  repository is connected for subsequent builds.
 - Resumable `pnpm testnet:gate2` automation now covers both deployments, MockUSDC funding/approval,
   intent opening, deterministic device receipt, Sepolia anchor, real proof wait, settlement, mined
-  replay rejection, station metrics, and atomic public evidence output. It remains unexecuted because
-  both native gas balances are zero.
+  replay rejection, station metrics, and atomic public evidence output.
+- Gate 2 completed on live testnets: five project contracts deployed, a funded intent opened, a
+  device-signed 4,200 Wh receipt mined on Sepolia, a 2,336-byte proof accepted by the live Block
+  Prover, settlement succeeded, and an identical replay reverted in a mined transaction.
+- Public `pnpm evidence:verify` independently checks chain IDs, all runtime bytecodes, deployment and
+  flow receipts, canonical source/target selectors, settled intent accounting, station metrics, and
+  the replay marker.
+- Sepolia registry source verified on Sourcify; MockUSDC, StationRegistry, ChargeIntentEscrow, and
+  AttestcoinChargeVerifier sources verified on Creditcoin Testnet Blockscout.
 
 ## In progress
 
-- None of the remaining engineering work can produce project-owned live evidence without testnet
-  transaction signatures and gas. Local code remains ready for Gate 2 deployment.
+- Activate the hosted dashboard with public deployment variables, publish the historical Gate 2
+  evidence panel, regenerate the deck PDF, and run final quality gates/CI.
 
 ## Blocked
 
-- ChargeProof Sepolia registry deployment, Creditcoin Testnet contract deployment, custom source
-  transaction, custom proof, settlement, and replay evidence require dedicated funded burner wallets.
-- Contract source verification requires explorer support/API access after deployment.
+- None for engineering/evidence. Source verification succeeded through Sourcify and Blockscout.
 - Video recording/upload requires a human recording session and media-hosting credentials.
+- Team identity/contact details and final DoraHacks submission require human input/login.
 
 No private key, seed, or credential has been requested or exposed.
 
@@ -63,9 +68,26 @@ Target: `0x7cc3a7333e9522f5921e6430bd59192caf7e1ce2382ae022879da93cd4ae9388`
 
 These are attributed official-example transactions, not ChargeProof settlement evidence.
 
+## Gate 2 project-owned evidence
+
+| Check                       | Result                                                     |
+| --------------------------- | ---------------------------------------------------------- |
+| Sepolia source receipt      | status `1`, block `11539874`, transaction index `78`       |
+| SDK proof                   | 2,336 encoded bytes, 7 Merkle siblings, 7 continuity roots |
+| Live `verifySingle`         | `true`                                                     |
+| Creditcoin settlement       | status `1`, block `5351717`                                |
+| Identical replay            | status `0`, block `5351718`                                |
+| Accounting                  | 1.47 station credit + 3.53 driver refund from 5.00 escrow  |
+| Station metrics             | 1 session, 4,200 Wh, 1.47 MockUSDC value                   |
+| Independent evidence script | passed; five runtime contracts and replay marker confirmed |
+
+Source: `0x5c7eed57e460be3741746ab469527361fd3f50fe63cd28c07733de0dbfa50938`<br>
+Settlement: `0xc7ad38e06f6462ab880ea638ae9205081435ed89a76581ad66067acb4436514b`<br>
+Replay: `0xb9155eb1eaaf8bee27c1ce6fd55008442d17c006bfa65240f33513467161daff`
+
 ## Quality gates actually run
 
-Final credential-free run on 2026-08-21:
+Final credential-free run on 2026-08-22:
 
 | Gate                             | Result                                                                         |
 | -------------------------------- | ------------------------------------------------------------------------------ |
@@ -77,11 +99,11 @@ Final credential-free run on 2026-08-21:
 | `pnpm test`                      | Passed: 24 tests (5 Sepolia, 8 Creditcoin, 6 worker, 3 shared, 2 web)          |
 | `pnpm integration:local`         | Passed source success, target escrow settlement, and worker state machine      |
 | `pnpm build`                     | Passed; contracts, shared, worker, and Next.js production build                |
-| `pnpm secret:scan`               | Passed for 101 repository files                                                |
+| `pnpm secret:scan`               | Passed for 103 repository files                                                |
 | `pnpm audit --prod`              | No known vulnerabilities found                                                 |
 | Responsive visual inspection     | Desktop and 500 px mobile breakpoint inspected; narrow title uses fluid sizing |
 
-The final `pnpm check` command completed successfully after the final security/UI changes.
+The final `pnpm check` command completed successfully after the live evidence/UI changes.
 
 ## Commands actually run
 
@@ -98,16 +120,17 @@ pnpm install --frozen-lockfile
 pnpm proof:resume -- 0xce785c35e300d607d83da9564990c4d2aaf45dafc68ef76539d97aee3de6859b
 pnpm wallets:create
 pnpm wallets:status
+pnpm testnet:gate2
+pnpm evidence:verify
 pnpm check
 pnpm audit --prod
+pnpm --filter @chargeproof/contracts-sepolia exec hardhat verify sourcify --network sepolia --creation-tx-hash <PUBLIC_DEPLOYMENT_TX> <PUBLIC_CONTRACT> <PUBLIC_OWNER>
+pnpm --filter @chargeproof/contracts-creditcoin exec hardhat verify blockscout --network creditcoinTestnet <PUBLIC_CONTRACT> <PUBLIC_CONSTRUCTOR_ARGS>
+npx --yes vercel@latest env add <PUBLIC_DEPLOYMENT_VARIABLE> production --value <PUBLIC_ADDRESS> --no-sensitive --yes
+npx --yes vercel@latest env add DEVICE_SIMULATOR_PRIVATE_KEY production --sensitive --yes < <IGNORED_LOCAL_VALUE>
 npx --yes vercel@latest deploy --prod --yes --logs
 ```
 
-Live research also used read-only JSON-RPC, proof-service, SDK proof-builder, Chain Info, transaction
-receipt, and Block Prover calls. No deployment or value-moving command has been run.
-
-## Current funding blocker
-
-The dedicated deployer is `0x33c7dE76ECCA5293D8d5Ee4aC6e8765213418267`. It currently has zero
-Sepolia ETH and zero Creditcoin Testnet CTC. Fund this public address through the official faucets,
-run `pnpm wallets:status`, then follow `docs/TESTNET_DEPLOYMENT.md`. Never share either private key.
+Live work also used JSON-RPC, the proof service, SDK proof builder, Chain Info and Block Prover calls.
+All state-changing operations were confined to Ethereum Sepolia and Creditcoin Testnet. No private key
+was printed, serialized into public evidence, committed, or sent to a browser.

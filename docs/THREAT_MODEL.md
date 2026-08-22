@@ -97,7 +97,8 @@ boundary is authenticated source bytes plus destination-side semantic validation
 ## Known MVP limitations
 
 - Station onboarding and device rotation are owner-managed.
-- The test suite mocks the native precompile boundary; only Gate 1 exercises the live precompile so far.
+- The test suite mocks the native precompile boundary. Gate 1 and the project-owned Gate 2 run exercise
+  the live precompile; Gate 2 additionally proves the custom target settlement and replay rejection.
 - There is no slashing, bonded operator identity, meter certification, fiat redemption, privacy layer,
   multi-token payment, or chargeback process.
 - Public RPC/proof endpoints have no project SLA.

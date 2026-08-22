@@ -26,6 +26,7 @@
     "testnet:deploy": "pnpm --filter @chargeproof/contracts-sepolia deploy:sepolia && pnpm --filter @chargeproof/contracts-creditcoin deploy:creditcoin-testnet",
     "gate2:run": "pnpm --filter @chargeproof/attestation-worker gate2:run",
     "testnet:gate2": "pnpm testnet:deploy && pnpm gate2:run",
+    "evidence:verify": "node scripts/verify-live-evidence.mjs",
     "wallets:create": "node scripts/create-testnet-burners.mjs",
     "wallets:status": "node scripts/check-testnet-readiness.mjs",
     "secret:scan": "node scripts/secret-scan.mjs",

@@ -45,6 +45,11 @@ The result is a reusable DePIN settlement primitive for EV roaming, solar microg
 swapping, and other metered infrastructure—while deliberately shipping one complete EV vertical slice
 instead of broad, unfinished features.
 
+The project-owned Gate 2 run settled a 4.20 kWh receipt: the operator received 1.47 valueless
+MockUSDC, 3.53 was credited back to the driver, and a second mined submission of the identical proof
+reverted. The source, settlement, replay, proof dimensions, contracts, and public-RPC verification are
+linked in `submission/EVIDENCE.md`.
+
 ## Attestcoin Protocol Integration Summary
 
 ChargeProof uses `@gluwa/usc-sdk@0.18.0` with Sepolia chain key `1`. The worker queries Creditcoin's
@@ -62,19 +67,26 @@ between the Sepolia receipt and Creditcoin settlement.
 - Project Deck/PDF URL:
   `https://github.com/tang-vu/ChargeProof/blob/main/submission/ChargeProof-Deck.pdf`
 - Demo Video URL: `[DEMO_VIDEO_URL]`
-- Live Demo URL: `https://chargeproof-plum.vercel.app` (currently labeled Local simulation; live
-  testnet mode activates only after Gate 2 deployment metadata exists)
-- Sepolia source contract: `[SEPOLIA_REGISTRY_EXPLORER_URL]`
-- Creditcoin escrow: `[CREDITCOIN_ESCROW_EXPLORER_URL]`
-- Creditcoin verifier: `[CREDITCOIN_VERIFIER_EXPLORER_URL]`
-- Real custom source transaction: `[CHARGEPROOF_SEPOLIA_TX_URL]`
-- Real custom settlement transaction: `[CHARGEPROOF_CREDITCOIN_TX_URL]`
-- Rejected replay evidence: `[CHARGEPROOF_REPLAY_TX_OR_TRACE_URL]`
+- Live Demo URL: `https://chargeproof-plum.vercel.app`
+- Sepolia source contract:
+  `https://sepolia.etherscan.io/address/0x1F4E029B8e1FD4291fB96F64C3f12529F1f756fc`
+- Sepolia verified source:
+  `https://sourcify.dev/server/repo-ui/11155111/0x1F4E029B8e1FD4291fB96F64C3f12529F1f756fc`
+- Creditcoin escrow:
+  `https://creditcoin-testnet.blockscout.com/address/0x39349C8539055C3E6fc637651d4Fe3373E3dB988`
+- Creditcoin verifier:
+  `https://creditcoin-testnet.blockscout.com/address/0xA205b6d1BD09ACB1b9575A98a942aCbcFF3CdEf3`
+- Real custom source transaction:
+  `https://sepolia.etherscan.io/tx/0x5c7eed57e460be3741746ab469527361fd3f50fe63cd28c07733de0dbfa50938`
+- Real custom settlement transaction:
+  `https://creditcoin-testnet.blockscout.com/tx/0xc7ad38e06f6462ab880ea638ae9205081435ed89a76581ad66067acb4436514b`
+- Rejected replay evidence:
+  `https://creditcoin-testnet.blockscout.com/tx/0xb9155eb1eaaf8bee27c1ce6fd55008442d17c006bfa65240f33513467161daff`
 
 ## Deployment Evidence
 
-See `submission/EVIDENCE.md`. Do not replace placeholders until each explorer page is public and the
-expected result has been independently checked.
+See `submission/EVIDENCE.md`. The project-owned Gate 2 rows were independently checked through public
+RPCs with `pnpm evidence:verify`.
 
 ## Team
 

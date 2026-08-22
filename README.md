@@ -9,14 +9,15 @@ escrow is credited back to the driver.
 
 **Hackathon:** BUIDL CTC 2026 Fall — “BUIDL For The Real World”<br>
 **Track:** DePIN<br>
-**Status:** contracts, worker, dashboard, and local tests are complete; ChargeProof-owned testnet
-deployments still require funded burner wallets. Official-protocol proof-spike evidence is clearly
-separated from project deployment evidence.
+**Status:** the project-owned Sepolia-to-Creditcoin Gate 2 flow is live and explorer-verifiable. A
+real Attestcoin proof settled one funded intent, and a mined replay attempt reverted as designed.
+Official-example Gate 1 evidence remains clearly separated from ChargeProof-owned evidence.
 
 **Submission deck:** [ChargeProof-Deck.pdf](submission/ChargeProof-Deck.pdf)
 
-**Live demo:** [chargeproof-plum.vercel.app](https://chargeproof-plum.vercel.app) — explicitly runs in
-`LOCAL SIMULATION` mode until project-owned testnet contracts are deployed.
+**Live demo:** [chargeproof-plum.vercel.app](https://chargeproof-plum.vercel.app) — configured for the
+project-owned Sepolia and Creditcoin Testnet deployments and seeded with a clearly labeled previous
+real settlement.
 
 ## The real-world problem
 
@@ -93,21 +94,25 @@ See [Architecture](docs/ARCHITECTURE.md) and the exact
 
 ## Live evidence and contracts
 
-ChargeProof deployment metadata is machine-readable in
-[`deployments/`](deployments). Empty addresses mean “not deployed,” never a simulated deployment.
+ChargeProof deployment metadata and the generated Gate 2 result are machine-readable in
+[`deployments/`](deployments).
 
-| Evidence                                                       | Status                 | Link                                                                                                                                      |
-| -------------------------------------------------------------- | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| Official Attestcoin example source transaction used for Gate 1 | Verified               | [Sepolia transaction](https://sepolia.etherscan.io/tx/0xce785c35e300d607d83da9564990c4d2aaf45dafc68ef76539d97aee3de6859b)                 |
-| Gate 1 proof generated with SDK 0.18.0                         | Verified locally       | 8 Merkle siblings, 47 continuity roots; live `verifySingle = true`                                                                        |
-| Official example destination transaction                       | Verified               | [Creditcoin transaction](https://creditcoin-testnet.blockscout.com/tx/0x7cc3a7333e9522f5921e6430bd59192caf7e1ce2382ae022879da93cd4ae9388) |
-| ChargeProof Sepolia registry                                   | Awaiting funded burner | See `deployments/sepolia.json`                                                                                                            |
-| ChargeProof Creditcoin contracts and custom settlement         | Awaiting funded burner | See `deployments/creditcoin-testnet.json`                                                                                                 |
-| Hosted dashboard                                               | Local simulation       | [Vercel production deployment](https://chargeproof-plum.vercel.app)                                                                       |
+| Evidence                                                       | Status               | Link                                                                                                                               |
+| -------------------------------------------------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| ChargeProof Sepolia registry                                   | Source verified      | [`0x1F4E…56fc`](https://sourcify.dev/server/repo-ui/11155111/0x1F4E029B8e1FD4291fB96F64C3f12529F1f756fc)                           |
+| Creditcoin escrow                                              | Source verified      | [`0x39349C…B988`](https://creditcoin-testnet.blockscout.com/address/0x39349C8539055C3E6fc637651d4Fe3373E3dB988#code)               |
+| Creditcoin Attestcoin verifier                                 | Source verified      | [`0xA205b6…dEf3`](https://creditcoin-testnet.blockscout.com/address/0xA205b6d1BD09ACB1b9575A98a942aCbcFF3CdEf3#code)               |
+| Funded Creditcoin intent                                       | Success              | [`0xb9e39a…f871`](https://creditcoin-testnet.blockscout.com/tx/0xb9e39a6377a1f491e83b70d6673243cc7093f0d3cf83d9ade015f8ee9583f871) |
+| Device-signed ChargeProof source receipt                       | Success              | [`0x5c7eed…0938`](https://sepolia.etherscan.io/tx/0x5c7eed57e460be3741746ab469527361fd3f50fe63cd28c07733de0dbfa50938)              |
+| Custom Attestcoin proof                                        | Verified live        | 2,336 encoded bytes, 7 Merkle siblings, 7 continuity roots; `verifySingle = true`                                                  |
+| ChargeProof settlement                                         | Success              | [`0xc7ad38…514b`](https://creditcoin-testnet.blockscout.com/tx/0xc7ad38e06f6462ab880ea638ae9205081435ed89a76581ad66067acb4436514b) |
+| Duplicate proof replay                                         | Reverted as expected | [`0xb9155e…daff`](https://creditcoin-testnet.blockscout.com/tx/0xb9155eb1eaaf8bee27c1ce6fd55008442d17c006bfa65240f33513467161daff) |
+| Hosted dashboard                                               | Live testnet         | [Vercel production deployment](https://chargeproof-plum.vercel.app)                                                                |
+| Official Attestcoin example source transaction used for Gate 1 | Attributed           | [Sepolia transaction](https://sepolia.etherscan.io/tx/0xce785c35e300d607d83da9564990c4d2aaf45dafc68ef76539d97aee3de6859b)          |
 
-The first three rows prove the current official protocol/tooling path, not a ChargeProof settlement.
-Project-specific evidence will be added only after explorer-verifiable deployment. See
-[submission/EVIDENCE.md](submission/EVIDENCE.md).
+The custom proof settled 1.47 MockUSDC to the station, credited a 3.53 MockUSDC driver refund, and
+recorded 4,200 Wh. The final row is official-example scaffolding, not project-owned evidence. See
+[submission/EVIDENCE.md](submission/EVIDENCE.md) for the strict attribution boundary.
 
 ## Security model
 
@@ -174,6 +179,7 @@ pnpm compile
 pnpm test
 pnpm build
 pnpm secret:scan
+pnpm evidence:verify
 pnpm proof:resume -- 0xSOURCE_TRANSACTION
 pnpm wallets:status
 # Credentialed and state-changing on testnets only:
@@ -187,7 +193,8 @@ precompile boundary; live protocol evidence is labeled separately.
 
 - The charger is a hardware simulator, not a connected physical EVSE.
 - Device authorization is owner-managed and centralized for the MVP.
-- Testnet deployment and custom explorer evidence require funded burner wallets.
+- A new interactive live run requires testnet gas and a browser wallet; the seeded historical
+  settlement remains independently verifiable without either.
 - RPC and proof services are external availability dependencies; the worker persists progress and can
   resume, but cannot make a stalled attestation advance.
 - `MockUSDC` has no monetary value and is not production collateral.

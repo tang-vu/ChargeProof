@@ -33,9 +33,9 @@ The creation command refuses to overwrite `.env` or `apps/web/.env.local`, write
 Git-ignored files, and prints public addresses only. The status command derives the public addresses
 again and reads both native balances without printing any key.
 
-Confirm the wallet balance and chain ID with a read-only wallet or explorer. Confirm the deployment
-JSON still has `"status": "not-deployed"`; scripts refuse to silently overwrite a known live
-deployment and check code when metadata already describes one.
+Confirm the wallet balance and chain ID with a read-only wallet or explorer. Read the deployment JSON
+before acting: `not-deployed` permits the first deployment, while `deployed` makes the scripts validate
+and reuse the known live addresses rather than overwrite them.
 
 ## Funding the burner
 
@@ -135,6 +135,7 @@ Update both deployment JSON files and `submission/EVIDENCE.md` with explorer-ver
 
 The automated runner already produces the machine-readable evidence JSON. Review every explorer
 receipt before copying its facts into submission prose or enabling the hosted dashboard's live mode.
+For the 2026-08-22 deployment, `pnpm evidence:verify` performs the repeatable public-RPC review.
 
 ## Recovery
 

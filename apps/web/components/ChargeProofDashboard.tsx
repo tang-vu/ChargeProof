@@ -26,6 +26,7 @@ import {
 } from '@chargeproof/shared';
 
 import { deployments, liveDeploymentReady } from '../lib/deployments';
+import { historicalSettlement } from '../lib/historical-evidence';
 import { wagmiConfig } from '../lib/wagmi';
 
 const STORAGE_KEY = 'chargeproof.live-run.v1';
@@ -774,6 +775,49 @@ export function ChargeProofDashboard() {
               </p>
             </div>
           )}
+          <div className="historical-proof">
+            <div className="historical-heading">
+              <div>
+                <span>PREVIOUS REAL SETTLEMENT</span>
+                <b>Creditcoin block #{historicalSettlement.settlementBlockNumber}</b>
+              </div>
+              <time dateTime={historicalSettlement.completedAt}>22 AUG 2026</time>
+            </div>
+            <div className="metadata-grid">
+              <Stat label="Energy settled" value="4.20 kWh" />
+              <Stat label="Station payment" value={historicalSettlement.stationPayment} />
+              <Stat label="Driver refund" value={historicalSettlement.driverRefund} />
+              <Stat
+                label="Attestcoin proof"
+                value={`${historicalSettlement.merkleSiblingCount} siblings / ${historicalSettlement.continuityRootCount} roots`}
+              />
+              <Stat
+                label="Block Prover"
+                value={historicalSettlement.precompileVerified ? 'verifySingle = true' : 'unverified'}
+              />
+              <Stat label="Replay evidence" value={historicalSettlement.replayStatus} />
+            </div>
+            <div className="historical-links">
+              <ExplorerLink
+                network="sepolia"
+                hash={historicalSettlement.sourceTransactionHash}
+                label="Real source receipt"
+              />
+              <ExplorerLink
+                network="creditcoin-testnet"
+                hash={historicalSettlement.settlementTransactionHash}
+                label="Real settlement"
+              />
+              <ExplorerLink
+                network="creditcoin-testnet"
+                hash={historicalSettlement.replayTransactionHash}
+                label="Rejected replay"
+              />
+            </div>
+            <p className="disclosure">
+              Historical project-owned testnet evidence. This panel is separate from the current browser run.
+            </p>
+          </div>
           <div className="protocol-spike">
             <span>VERIFIED PROTOCOL SPIKE</span>
             <p>Official example scaffolding · not a ChargeProof settlement</p>

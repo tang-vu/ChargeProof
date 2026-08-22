@@ -72,18 +72,15 @@ DAO, proxy, or decorative AI layer.
 
 ## 6 — Live end-to-end evidence
 
-Populate after Gate 2:
+| Evidence                  | Explorer result                               |
+| ------------------------- | --------------------------------------------- |
+| Funded Creditcoin intent  | `0xb9e39a…f871` · success                     |
+| Device receipt on Sepolia | `0x5c7eed…0938` · block 11,539,874            |
+| Attestcoin proof          | 2,336 bytes · 7 siblings · 7 continuity roots |
+| Creditcoin settlement     | `0xc7ad38…514b` · 1.47 / 3.53 MockUSDC        |
+| Replayed proof            | `0xb9155e…daff` · mined revert                |
 
-| Evidence                  | Explorer result                                              |
-| ------------------------- | ------------------------------------------------------------ |
-| Funded Creditcoin intent  | `[INTENT_TX_SHORT]`                                          |
-| Device receipt on Sepolia | `[SOURCE_TX_SHORT]`                                          |
-| Attestcoin proof          | `[SIBLING_COUNT]` siblings · `[ROOT_COUNT]` continuity roots |
-| Creditcoin settlement     | `[SETTLEMENT_TX_SHORT]`                                      |
-| Replayed proof            | expected custom-error revert `[REPLAY_EVIDENCE]`             |
-
-Until populated, label this slide **Deployment pending funded testnet burners**. Gate 1 official-protocol
-spike evidence belongs in speaker notes, not as a custom ChargeProof claim.
+Gate 1 official-protocol spike evidence belongs in speaker notes, not as a custom ChargeProof claim.
 
 ---
 

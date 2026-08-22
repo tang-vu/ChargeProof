@@ -789,6 +789,40 @@ pre {
   font-size: 11px;
   line-height: 1.6;
 }
+.historical-proof {
+  margin-top: 20px;
+  padding: 18px;
+  border: 1px solid rgba(176, 255, 56, 0.28);
+  background: linear-gradient(135deg, rgba(176, 255, 56, 0.055), rgba(22, 229, 255, 0.025));
+}
+.historical-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+}
+.historical-heading > div {
+  display: grid;
+  gap: 6px;
+}
+.historical-heading span {
+  color: var(--lime);
+  font: 600 8px var(--font-mono);
+  letter-spacing: 0.12em;
+}
+.historical-heading b,
+.historical-heading time {
+  font: 500 10px var(--font-mono);
+}
+.historical-heading time {
+  color: var(--muted);
+}
+.historical-links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 14px;
+}
 .protocol-spike {
   border-top: 1px solid var(--line);
   padding-top: 17px;
@@ -1022,6 +1056,9 @@ pre {
     top: 11px;
   }
   .protocol-spike {
+    grid-template-columns: 1fr;
+  }
+  .historical-links {
     grid-template-columns: 1fr;
   }
   .protocol-spike p {

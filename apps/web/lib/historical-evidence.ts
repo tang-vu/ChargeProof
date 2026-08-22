@@ -1,0 +1,15 @@
+export const historicalSettlement = {
+  completedAt: '2026-08-22T01:52:04.564Z',
+  sourceTransactionHash: '0x5c7eed57e460be3741746ab469527361fd3f50fe63cd28c07733de0dbfa50938',
+  settlementTransactionHash: '0xc7ad38e06f6462ab880ea638ae9205081435ed89a76581ad66067acb4436514b',
+  replayTransactionHash: '0xb9155eb1eaaf8bee27c1ce6fd55008442d17c006bfa65240f33513467161daff',
+  sourceBlockNumber: 11_539_874,
+  settlementBlockNumber: 5_351_717,
+  energyWh: 4_200,
+  stationPayment: '1.47 cpUSDC',
+  driverRefund: '3.53 cpUSDC',
+  merkleSiblingCount: 7,
+  continuityRootCount: 7,
+  precompileVerified: true,
+  replayStatus: 'reverted',
+} as const;

@@ -9,7 +9,7 @@ path for normal attestation latency.
 
 - Run `pnpm check` and record its result in `docs/BUILD_STATUS.md`.
 - Confirm deployment JSON, public web environment, device signer address, and both burner balances.
-- Prepare one new open intent and one previously completed real settlement.
+- Prepare one new open intent and use the seeded Gate 2 settlement as the slow-network backup.
 - Keep Sepolia and Creditcoin explorer tabs open to the relevant contract/transaction pages.
 - Verify the proof worker can resume the prepared source hash.
 - Prefer preparing the complete evidence set with `pnpm testnet:gate2`; it requires no browser import
@@ -20,7 +20,7 @@ path for normal attestation latency.
 ## Primary click sequence
 
 1. Open the dashboard and point out **Live testnet**, both network badges, and the connected address.
-2. Choose `CP-HCMC-001`, mint demo MockUSDC, approve, and open the intent.
+2. Choose `CP-SGN-001`, mint demo MockUSDC, approve, and open the intent.
 3. Show the Creditcoin explorer link and intent's maximum payment/tariff/expiry.
 4. Start the virtual charger; show increasing Wh, duration, and deterministic charge.
 5. Stop/finalize; briefly open the decoded receipt and device-signature status.
@@ -57,17 +57,24 @@ recording:
 This is not a mock fallback. The historical entry must be populated only with a previously completed
 ChargeProof testnet flow. If that evidence does not exist, pause recording rather than fabricating it.
 
+Prepared project-owned backup:
+
+- source: `0x5c7eed57e460be3741746ab469527361fd3f50fe63cd28c07733de0dbfa50938`;
+- settlement: `0xc7ad38e06f6462ab880ea638ae9205081435ed89a76581ad66067acb4436514b`;
+- replay: `0xb9155eb1eaaf8bee27c1ce6fd55008442d17c006bfa65240f33513467161daff`;
+- proof: 7 Merkle siblings, 7 continuity roots, live `verifySingle = true`.
+
 ## Recovery table
 
-| Symptom                       | Recovery                                                                  |
-| ----------------------------- | ------------------------------------------------------------------------- |
-| Wallet on wrong chain         | Use the dashboard network action, then reread chain badge before signing  |
-| Source transaction pending    | Open explorer; wait or replace same nonce in wallet                       |
-| RPC error                     | Copy diagnostics, retry the idempotent step, preserve source hash         |
-| Proof service error           | Retry later from stored state; no source resubmission needed              |
-| Browser reload                | Paste/select saved source hash; local storage and worker state resume     |
-| Target transaction pending    | Open stored target hash; never create a second source receipt             |
-| Replay UI cannot estimate gas | Show expected custom-error simulation or a pre-recorded failed testnet tx |
+| Symptom                       | Recovery                                                                 |
+| ----------------------------- | ------------------------------------------------------------------------ |
+| Wallet on wrong chain         | Use the dashboard network action, then reread chain badge before signing |
+| Source transaction pending    | Open explorer; wait or replace same nonce in wallet                      |
+| RPC error                     | Copy diagnostics, retry the idempotent step, preserve source hash        |
+| Proof service error           | Retry later from stored state; no source resubmission needed             |
+| Browser reload                | Paste/select saved source hash; local storage and worker state resume    |
+| Target transaction pending    | Open stored target hash; never create a second source receipt            |
+| Replay UI cannot estimate gas | Open the seeded mined-revert transaction and explain the replay marker   |
 
 ## Evidence capture
 

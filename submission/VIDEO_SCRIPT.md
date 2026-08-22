@@ -1,6 +1,7 @@
 # Demo video script
 
-Target duration: 2:50. Narration is exact English copy. Replace bracketed evidence only after Gate 2.
+Target duration: 2:50. Narration is exact English copy. Gate 2 evidence below is project-owned and
+explorer-verifiable; only the team/video placeholders remain human actions.
 
 ## 0:00–0:15 — Problem and pitch
 
@@ -31,7 +32,7 @@ later registry changes cannot redirect this intent.”
 
 **Click:** Faucet if needed → approve → open intent → open Creditcoin explorer link.
 
-**Expected:** Intent state `Open`, transaction `[INTENT_TX_SHORT]` successful.
+**Expected:** Intent state `Open`, transaction `0xb9e39a…f871` successful.
 
 ## 0:55–1:15 — Simulate charging
 
@@ -55,7 +56,7 @@ and its source block.”
 
 **Click:** Confirm → wait for mined → open Sepolia explorer.
 
-**Expected:** `[SOURCE_TX_SHORT]`, status success, canonical registry target.
+**Expected:** `0x5c7eed…0938`, status success, canonical registry target.
 
 ## 1:35–1:50 — Generate proof
 
@@ -68,10 +69,11 @@ settlement.”
 
 **Click:** Refresh/resume.
 
-**Expected:** `Proof ready`, chain key `1`, `[SIBLING_COUNT]` siblings, `[ROOT_COUNT]` roots.
+**Expected:** `Proof ready`, chain key `1`, 7 siblings, 7 continuity roots.
 
 **Slow path:** “Attestation is asynchronous, so I can safely resume by hash. I will switch to a
-previous real ChargeProof receipt prepared for this demo.” Load `[BACKUP_SOURCE_TX]` and continue.
+previous real ChargeProof receipt prepared for this demo.” Load
+`0x5c7eed57e460be3741746ab469527361fd3f50fe63cd28c07733de0dbfa50938` and continue.
 
 ## 1:50–2:20 — Settle and show replay failure
 
@@ -85,7 +87,8 @@ source, intent, and session replay keys.”
 
 **Click:** Settle → explorer → replay action or failed replay evidence.
 
-**Expected:** `[SETTLEMENT_TX_SHORT]` success; operator `[PAYMENT]`; refund `[REFUND]`; replay reverts.
+**Expected:** `0xc7ad38…514b` success; operator 1.47 MockUSDC; refund 3.53 MockUSDC;
+`0xb9155e…daff` reverts.
 
 ## 2:20–2:40 — Attestcoin indispensability
 

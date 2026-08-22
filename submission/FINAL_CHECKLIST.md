@@ -12,8 +12,8 @@
 - [x] Responsive dashboard with explicit live/local modes
 - [x] Source/intent/device/amount/expiry/replay validation
 - [x] Unit tests mock only the native precompile boundary
-- [ ] Gate 2 project-owned testnet vertical slice
-- [ ] Rejected testnet replay evidence
+- [x] Gate 2 project-owned testnet vertical slice
+- [x] Rejected testnet replay evidence
 
 ## Quality gates
 
@@ -31,14 +31,14 @@
 
 ## Evidence
 
-- [ ] Sepolia registry address and verified source if explorer supports it
-- [ ] Creditcoin contract addresses and verified sources if explorer supports it
-- [ ] Real ChargeProof Sepolia receipt transaction
-- [ ] Real ChargeProof proof metadata and live precompile result
-- [ ] Real Creditcoin settlement transaction
-- [ ] Replay rejection transaction/trace
-- [ ] Deployment JSON updated without placeholders
-- [ ] Historical success dashboard entry populated from real evidence only
+- [x] Sepolia registry address, public deployment transaction, and Sourcify source verification
+- [x] Creditcoin contract addresses, deployment transactions, and Blockscout source verification
+- [x] Real ChargeProof Sepolia receipt transaction
+- [x] Real ChargeProof proof metadata and live precompile result
+- [x] Real Creditcoin settlement transaction
+- [x] Replay rejection transaction/trace
+- [x] Deployment JSON updated without placeholders
+- [x] Historical success dashboard entry populated from real evidence only
 
 ## Submission
 
@@ -54,8 +54,8 @@
 - [x] Deck PDF uploaded to a stable public GitHub URL
 - [ ] Demo recorded and uploaded by a human
 - [x] Repository visibility confirmed public
-- [x] Live frontend deployed with authorized hosting credentials and labeled Local simulation
-- [ ] Team names, bios, and all URL placeholders filled
+- [x] Live frontend deployed with authorized hosting credentials and live-testnet evidence
+- [ ] Team names, bios, video URL, and remaining human-only placeholders filled
 - [ ] DoraHacks form reviewed and submitted before 2026-09-06 23:59 ET
 
 ## Truthfulness

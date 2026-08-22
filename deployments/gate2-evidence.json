@@ -1,6 +1,54 @@
 {
   "schemaVersion": 1,
   "project": "ChargeProof",
-  "status": "not-run",
-  "note": "Populated atomically by pnpm testnet:gate2 after real project-owned transactions complete."
+  "status": "complete",
+  "generatedAt": "2026-08-22T01:52:04.564Z",
+  "driver": "0x33c7dE76ECCA5293D8d5Ee4aC6e8765213418267",
+  "deviceSigner": "0xcdD9c58ab595233732e82e4307d354F4D3b73Fb8",
+  "intentId": "0x3afb2b0d6c7c2c9f3b3eda3dbc51f979fc829083e0cd0e71a25bda6598b2de6b",
+  "sessionId": "0x90265bad1fc40ff67326f5bdd4f157b3085b0a1899cdffd6787baef85560601b",
+  "contracts": {
+    "sepoliaRegistry": "0x1F4E029B8e1FD4291fB96F64C3f12529F1f756fc",
+    "mockUsdc": "0x1F4E029B8e1FD4291fB96F64C3f12529F1f756fc",
+    "stationRegistry": "0xc56e90697F04F1E5D46816205D8cd69Da4341c6c",
+    "escrow": "0x39349C8539055C3E6fc637651d4Fe3373E3dB988",
+    "verifier": "0xA205b6d1BD09ACB1b9575A98a942aCbcFF3CdEf3"
+  },
+  "transactions": {
+    "faucet": "0xa18e8e4084e9ddbe68820512b4b34986ae1dea839a195b7a01d717bedca921e7",
+    "approval": "0x708e78e3c45cc8185b2a80bc1cfd5ccf7d462650662bc78066cca9125e5c4a0c",
+    "intent": "0xb9e39a6377a1f491e83b70d6673243cc7093f0d3cf83d9ade015f8ee9583f871",
+    "source": "0x5c7eed57e460be3741746ab469527361fd3f50fe63cd28c07733de0dbfa50938",
+    "settlement": "0xc7ad38e06f6462ab880ea638ae9205081435ed89a76581ad66067acb4436514b",
+    "replay": "0xb9155eb1eaaf8bee27c1ce6fd55008442d17c006bfa65240f33513467161daff"
+  },
+  "explorers": {
+    "intent": "https://creditcoin-testnet.blockscout.com/tx/0xb9e39a6377a1f491e83b70d6673243cc7093f0d3cf83d9ade015f8ee9583f871",
+    "source": "https://sepolia.etherscan.io/tx/0x5c7eed57e460be3741746ab469527361fd3f50fe63cd28c07733de0dbfa50938",
+    "settlement": "https://creditcoin-testnet.blockscout.com/tx/0xc7ad38e06f6462ab880ea638ae9205081435ed89a76581ad66067acb4436514b",
+    "replay": "https://creditcoin-testnet.blockscout.com/tx/0xb9155eb1eaaf8bee27c1ce6fd55008442d17c006bfa65240f33513467161daff"
+  },
+  "proof": {
+    "sourceBlockNumber": 11539874,
+    "transactionIndex": 78,
+    "encodedTransactionBytes": 2336,
+    "merkleSiblingCount": 7,
+    "continuityRootCount": 7,
+    "precompileVerified": true
+  },
+  "settlement": {
+    "energyWh": "4200",
+    "maxPayment": "5000000",
+    "stationPayment": "1470000",
+    "driverRefund": "3530000",
+    "combinedClaimableAtDemoAddress": "5000000",
+    "completedSessions": "1",
+    "successfulSettlements": "1",
+    "totalEnergyWh": "4200",
+    "totalValueSettled": "1470000"
+  },
+  "replay": {
+    "expected": "reverted",
+    "observed": "reverted"
+  }
 }

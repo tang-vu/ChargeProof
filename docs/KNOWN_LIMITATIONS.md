@@ -17,8 +17,8 @@
   callback-heavy, or sanctioned assets are not supported.
 - **Legal/commercial scope:** the MVP does not implement tax invoices, disputes, chargebacks, roaming
   contracts, identity checks, or jurisdiction-specific consumer rules.
-- **No live ChargeProof evidence yet:** project-owned deployments and transactions require funded
-  burner wallets. Gate 1 proves current official Attestcoin compatibility only.
+- **Single live sample:** one project-owned Gate 2 settlement and one rejected replay are public. More
+  sessions, devices, adverse-network runs, and long-duration reliability data are still needed.
 
 ## Security boundary
 

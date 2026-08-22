@@ -1,9 +1,46 @@
 {
   "schemaVersion": 1,
   "project": "ChargeProof",
-  "status": "not-deployed",
+  "status": "deployed",
   "network": "creditcoin-testnet",
   "chainId": 102031,
-  "contracts": {},
-  "note": "Populate only through the idempotent deployment script after a funded burner signs."
+  "deployedAt": "2026-08-22T01:41:31.467Z",
+  "deployer": "0x33c7dE76ECCA5293D8d5Ee4aC6e8765213418267",
+  "contracts": {
+    "mockUsdc": "0x1F4E029B8e1FD4291fB96F64C3f12529F1f756fc",
+    "stationRegistry": "0xc56e90697F04F1E5D46816205D8cd69Da4341c6c",
+    "chargeIntentEscrow": "0x39349C8539055C3E6fc637651d4Fe3373E3dB988",
+    "attestcoinChargeVerifier": "0xA205b6d1BD09ACB1b9575A98a942aCbcFF3CdEf3"
+  },
+  "transactions": {
+    "deployMockUsdc": "0xc91d684b7e27c0ab6bec8461037a9f8698c9eb5483d4c5b6fbbfe39cb64134f0",
+    "deployStationRegistry": "0x674554a76008f9cd05268ca9e47af86b220f1ccda41cf5e7d80243909ffa5967",
+    "deployChargeIntentEscrow": "0x077030c2b3d4c158fe0232aa4e259cfedbe064fa169d1a44bdca1e6c3766c910",
+    "deployAttestcoinChargeVerifier": "0x845f776c10eefa17c45f79e1f128100b58080febe53e78d71c3fbe8caf85d12e",
+    "registerStation": "0x41835c602923f2b7b566a200bc42247cf073764249bfb60988054ce07470adca",
+    "setMetricsRecorder": "0x81fca5cc462fe626d74d2e5b1b875a07a057dc30fdd8801bb8fe697a16b7da96",
+    "setVerifier": "0xf00bbbf73820437538873575cf4edbcb10f9ac9e6d3e94a7dd8080bdfac209d5"
+  },
+  "attestcoin": {
+    "sourceChainKey": 1,
+    "sourceChainId": 11155111,
+    "sourceRegistry": "0x1F4E029B8e1FD4291fB96F64C3f12529F1f756fc",
+    "blockProver": "0x0000000000000000000000000000000000000FD2"
+  },
+  "station": {
+    "stationId": "0x43502d53474e2d30303100000000000000000000000000000000000000000000",
+    "payout": "0x33c7dE76ECCA5293D8d5Ee4aC6e8765213418267",
+    "deviceSigner": "0xcdD9c58ab595233732e82e4307d354F4D3b73Fb8"
+  },
+  "explorer": "https://creditcoin-testnet.blockscout.com",
+  "verification": {
+    "status": "verified",
+    "provider": "Blockscout",
+    "contracts": {
+      "mockUsdc": "https://creditcoin-testnet.blockscout.com/address/0x1F4E029B8e1FD4291fB96F64C3f12529F1f756fc#code",
+      "stationRegistry": "https://creditcoin-testnet.blockscout.com/address/0xc56e90697F04F1E5D46816205D8cd69Da4341c6c#code",
+      "chargeIntentEscrow": "https://creditcoin-testnet.blockscout.com/address/0x39349C8539055C3E6fc637651d4Fe3373E3dB988#code",
+      "attestcoinChargeVerifier": "https://creditcoin-testnet.blockscout.com/address/0xA205b6d1BD09ACB1b9575A98a942aCbcFF3CdEf3#code"
+    }
+  }
 }

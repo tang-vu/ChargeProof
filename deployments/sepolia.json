@@ -1,9 +1,26 @@
 {
   "schemaVersion": 1,
   "project": "ChargeProof",
-  "status": "not-deployed",
+  "status": "deployed",
   "network": "ethereum-sepolia",
   "chainId": 11155111,
-  "contracts": {},
-  "note": "Populate only through the idempotent deployment script after a funded burner signs."
+  "deployedAt": "2026-08-22T01:39:50.276Z",
+  "deployer": "0x33c7dE76ECCA5293D8d5Ee4aC6e8765213418267",
+  "contracts": {
+    "chargingSessionRegistry": "0x1F4E029B8e1FD4291fB96F64C3f12529F1f756fc"
+  },
+  "transactions": {
+    "deployChargingSessionRegistry": "0x565a0aaaac9dc7354de9fc254a188624ab249bc757861769cee2bed1b57c8c60",
+    "configureStation": "0x674d7d2f4c7a51aeca40467a21ceefde190a14648bd253df65cf3a18ebff8cd5"
+  },
+  "station": {
+    "stationId": "0x43502d53474e2d30303100000000000000000000000000000000000000000000",
+    "deviceSigner": "0xcdD9c58ab595233732e82e4307d354F4D3b73Fb8"
+  },
+  "explorer": "https://sepolia.etherscan.io",
+  "verification": {
+    "status": "verified",
+    "provider": "Sourcify",
+    "url": "https://sourcify.dev/server/repo-ui/11155111/0x1F4E029B8e1FD4291fB96F64C3f12529F1f756fc"
+  }
 }

@@ -146,8 +146,26 @@ The smallest current official Sepolia-to-Creditcoin flow was reproduced without 
   `0x7cc3a7333e9522f5921e6430bd59192caf7e1ce2382ae022879da93cd4ae9388`, status `1`
 
 This establishes current SDK/proof/precompile compatibility. It is explicitly **not** a ChargeProof
-receipt or settlement. A project-owned source transaction and target settlement remain blocked on
-funded burner-wallet signatures and will be placed in `submission/EVIDENCE.md` only after confirmation.
+receipt or settlement.
+
+## Gate 2 ChargeProof evidence
+
+The custom vertical slice completed on 2026-08-22 using the same worker and contract path:
+
+- Intent: `0xb9e39a6377a1f491e83b70d6673243cc7093f0d3cf83d9ade015f8ee9583f871`
+- Source transaction: `0x5c7eed57e460be3741746ab469527361fd3f50fe63cd28c07733de0dbfa50938`
+- Source block/index/status: `11539874` / `78` / `1`
+- Proof: 2,336 encoded transaction bytes, 7 Merkle siblings, 7 continuity roots
+- Live `PrecompileBlockProver.verifySingle`: `true`
+- Settlement: `0xc7ad38e06f6462ab880ea638ae9205081435ed89a76581ad66067acb4436514b`,
+  status `1`, Creditcoin block `5351717`
+- Replay: `0xb9155eb1eaaf8bee27c1ce6fd55008442d17c006bfa65240f33513467161daff`,
+  status `0`, Creditcoin block `5351718`
+
+The target recorded a settled 4,200 Wh session, 1.47 MockUSDC station credit, 3.53 MockUSDC driver
+refund, and all replay markers. `pnpm evidence:verify` independently checks runtime code, receipt
+statuses, canonical targets/selectors, intent state, metrics, and the session replay marker through
+public RPCs. Complete explorer links are in `submission/EVIDENCE.md`.
 
 ## Mock versus live boundary
 
@@ -155,6 +173,7 @@ funded burner-wallet signatures and will be placed in `submission/EVIDENCE.md` o
   with `MockNativeQueryVerifier` so arbitrary encoded fixtures can be exercised locally.
 - Worker unit tests replace RPC/prover ports, not its state machine.
 - Gate 1 used the live Sepolia RPC, proof service, Creditcoin Chain Info, and Block Prover.
+- Gate 2 used those same live boundaries and then executed the custom ChargeProof verifier and escrow.
 - The dashboard's “Local simulation” is visibly labeled and never produces fake hashes or explorer
   links.
 - Testnet mode is enabled only when complete deployment addresses are configured.
