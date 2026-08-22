@@ -21,6 +21,7 @@ packages/*/types/
 *.keystore
 *.mnemonic
 worker-state/
+submission/video/generated/
 
 # Deployment scratch files are never evidence
 deployments/*.local.json

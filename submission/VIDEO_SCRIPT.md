@@ -1,7 +1,20 @@
 # Demo video script
 
 Target duration: 2:50. Narration is exact English copy. Gate 2 evidence below is project-owned and
-explorer-verifiable; only the team/video placeholders remain human actions.
+explorer-verifiable. The reproducible production source is `submission/video/scenes.json`; generated
+media remains Git-ignored until a human reviews and uploads it.
+
+## Automated production
+
+```text
+pnpm video:visuals  # public dashboard and deck frames
+pnpm video:preview  # credential-free silent composition check
+pnpm video:audio    # MiMo V2.5 TTS followed by MiMo V2.5 ASR validation
+pnpm video:render   # final H.264/AAC MP4 with English subtitles
+```
+
+Never use a credential pasted into chat. Revoke it, configure its replacement only as a local
+`MIMO_API_KEY`, and review `submission/video/README.md` before generation.
 
 ## 0:00–0:15 — Problem and pitch
 

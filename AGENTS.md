@@ -19,6 +19,10 @@ Use pnpm only. Run `pnpm install`, `pnpm check`, or the narrower `pnpm lint`,
 `pnpm wallets:status` is read-only. `pnpm testnet:gate2` is the credentialed, state-changing testnet
 runner; invoke it only with dedicated funded burners and preserve `worker-state/gate2.json` for resume.
 
+`pnpm video:visuals` and `pnpm video:preview` are credential-free. `pnpm video:audio` performs a
+one-off MiMo V2.5 TTS/ASR run and may read only a dedicated `MIMO_API_KEY` from the local environment;
+never place that key in a command argument, source file, generated report, or chat.
+
 ## Security constraints
 
 - Testnets only. Never send a mainnet transaction.

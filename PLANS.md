@@ -30,7 +30,10 @@ Last updated: 2026-08-22
 - [x] Publish the repository, pass clean-runner CI, render the deck PDF, and deploy the truth-labeled
       dashboard to Vercel.
 - [x] Seed the dashboard, deck, runbook, and submission materials with project-owned Gate 2 evidence.
-- [ ] Record/upload the demo video and add human team identity before DoraHacks submission.
+- [x] Build and validate a reproducible 1920×1080 demo-video pipeline with public dashboard/deck
+      capture, FFmpeg composition, subtitles, MiMo V2.5 TTS, and MiMo V2.5 ASR quality checks.
+- [ ] Generate the final narration with a replacement, locally configured MiMo credential; review and
+      upload the video; add human team identity before DoraHacks submission.
 
 ## Architecture decisions
 

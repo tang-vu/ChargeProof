@@ -45,17 +45,26 @@ Last updated: 2026-08-22
   signer for a fresh, policy-compliant receipt.
 - Final desktop and true 390 px device-emulated production screenshots were inspected. The 390 px
   document and viewport widths matched exactly, with no horizontal overflow.
+- Reproducible demo-video pipeline added: ten deck pages and three production dashboard views render
+  at 1920×1080; nine exact English narration scenes total 448 words; MiMo V2.5 TTS output is checked
+  scene-by-scene with MiMo V2.5 ASR word error rate; FFmpeg emits H.264/AAC with English subtitles.
+- Credential-free silent composition rendered and inspected successfully: 178.02 seconds, 1920×1080,
+  H.264 video, 48 kHz stereo AAC, `mov_text` English subtitle track, and nine ordered scenes. Generated
+  media is Git-ignored and is not presented as the final narrated demo.
 
 ## In progress
 
-- Human-only submission operations: record/upload the demo, fill team identity/contact fields, and
-  submit the DoraHacks form.
+- Generate and review the MiMo-narrated video after a replacement API credential is configured
+  locally; then perform the human-only upload, team identity/contact, and DoraHacks submission steps.
 
 ## Blocked
 
 - None for engineering/evidence. Source verification succeeded through Sourcify and Blockscout.
 - Video recording/upload requires a human recording session and media-hosting credentials.
 - Team identity/contact details and final DoraHacks submission require human input/login.
+- The MiMo key pasted into chat is treated as compromised and was never used. Final TTS/ASR generation
+  is blocked until the user revokes it and sets a replacement `MIMO_API_KEY` locally. The account's
+  Token Plan terms must permit this one-off interactive generation; otherwise use a pay-as-you-go key.
 
 No private key, seed, or credential has been requested or exposed.
 

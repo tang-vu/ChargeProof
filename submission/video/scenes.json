@@ -1,0 +1,65 @@
+[
+  {
+    "id": "01-problem",
+    "title": "Problem and pitch",
+    "targetSeconds": 15,
+    "visual": "dashboard-hero.png",
+    "narration": "Electric vehicle charging crosses drivers, devices, operators, and payment systems that do not share one ledger. ChargeProof is a trustless settlement rail: the operator gets paid only when a cryptographically verified cross-chain charging receipt matches the driver's escrowed intent."
+  },
+  {
+    "id": "02-architecture",
+    "title": "Two chains, one proof",
+    "targetSeconds": 21,
+    "visual": "slide-5.png",
+    "narration": "The driver escrows demo U S D C on Creditcoin. A charger signs its metered receipt, and the driver anchors it on Sepolia. Attestcoin proves that exact successful transaction to Creditcoin. Our verifier then checks the source, sender, receipt, device, price, and replay state before settlement. Without Attestcoin, this path has no authenticated source input and cannot run."
+  },
+  {
+    "id": "03-intent",
+    "title": "Bounded charging intent",
+    "targetSeconds": 20,
+    "visual": "dashboard-workflow.png",
+    "narration": "The driver selects a registered station, mints valueless test Mock U S D C, and escrows a maximum payment with an agreed tariff and expiry. The station payout and authorized device signer are snapshotted when the intent opens, so later registry changes cannot redirect payment."
+  },
+  {
+    "id": "04-device",
+    "title": "Metered device receipt",
+    "targetSeconds": 20,
+    "visual": "slide-4.png",
+    "narration": "This is explicitly a hardware simulator for the hackathon M V P. It meters integer watt-hours, calculates the final amount without floating point, and uses an isolated burner device key to sign every receipt field as typed data. No persistent device private key reaches the browser."
+  },
+  {
+    "id": "05-source",
+    "title": "Canonical Sepolia anchor",
+    "targetSeconds": 18,
+    "visual": "slide-6.png",
+    "narration": "The driver submits the signed receipt to one canonical Sepolia function. The source contract rechecks the device, amount, timing, deterministic session identifier, and nonce. This project-owned transaction was mined successfully in Sepolia block eleven million, five hundred thirty-nine thousand, eight hundred seventy-four."
+  },
+  {
+    "id": "06-proof",
+    "title": "Real Attestcoin proof",
+    "targetSeconds": 19,
+    "visual": "dashboard-evidence.png",
+    "narration": "ChargeProof persists the source hash and waits until both on-chain and prover attestation heights pass its block. The official S D K returns the encoded transaction, Merkle path, and continuity proof. Our worker verifies the result against Creditcoin's live Block Prover before settlement is enabled."
+  },
+  {
+    "id": "07-settlement",
+    "title": "Settlement and replay rejection",
+    "targetSeconds": 28,
+    "visual": "slide-6.png",
+    "narration": "On Creditcoin, the native precompile authenticates the source bytes, and our contract repeats every business check. One point four seven Mock U S D C is credited to the operator, while three point five three is refunded to the driver. Station metrics update atomically. Transfers are pull-based, so a failed recipient cannot block settlement. Reusing the same proof fails under independent source, intent, and session replay keys. The rejected replay is also a mined, explorer-verifiable transaction."
+  },
+  {
+    "id": "08-security",
+    "title": "Honest trust boundary",
+    "targetSeconds": 19,
+    "visual": "slide-8.png",
+    "narration": "Attestcoin is not decoration. Remove it, and a relayer can invent source calldata because the settlement function loses its trusted cross-chain input. But we do not overclaim: Attestcoin proves the source transaction, not physical electricity. The authorized device signature represents that physical boundary in this M V P."
+  },
+  {
+    "id": "09-roadmap",
+    "title": "DePIN settlement infrastructure",
+    "targetSeconds": 18,
+    "visual": "slide-9.png",
+    "narration": "ChargeProof turns metered service into authenticated, bounded payment. Next, secure-element charger keys and O C P P or O C P I connect the protocol to real roaming infrastructure. The same audited primitive can then settle solar, telecom, and other DePIN services. ChargeProof: trustless cross-chain electric vehicle charging settlement."
+  }
+]
