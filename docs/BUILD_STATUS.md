@@ -24,7 +24,7 @@ Last updated: 2026-08-22
   type-aware ESLint; the first public CI run exposed this local-cache dependency.
 - Public repository published at `https://github.com/tang-vu/ChargeProof`; credential-free CI passed
   on a clean Ubuntu runner for the Gate 2 automation milestone:
-  `https://github.com/tang-vu/ChargeProof/actions/runs/32472627378`.
+  `https://github.com/tang-vu/ChargeProof/actions/runs/32545636716`.
 - Production Vercel dashboard deployed at `https://chargeproof-plum.vercel.app`; the public GitHub
   repository is connected for subsequent builds.
 - Resumable `pnpm testnet:gate2` automation now covers both deployments, MockUSDC funding/approval,
@@ -38,11 +38,18 @@ Last updated: 2026-08-22
   the replay marker.
 - Sepolia registry source verified on Sourcify; MockUSDC, StationRegistry, ChargeIntentEscrow, and
   AttestcoinChargeVerifier sources verified on Creditcoin Testnet Blockscout.
+- Production Vercel environment activated with the five public contract addresses and a constrained,
+  sensitive server-only demo device key. No deployer or settler key was uploaded. Production returned
+  HTTP 200, rendered the `LIVE TESTNET` and historical evidence states, rejected malformed attestation
+  input with HTTP 400, and returned a valid 65-byte EIP-712 signature from the authorized device
+  signer for a fresh, policy-compliant receipt.
+- Final desktop and true 390 px device-emulated production screenshots were inspected. The 390 px
+  document and viewport widths matched exactly, with no horizontal overflow.
 
 ## In progress
 
-- Activate the hosted dashboard with public deployment variables, publish the historical Gate 2
-  evidence panel, regenerate the deck PDF, and run final quality gates/CI.
+- Human-only submission operations: record/upload the demo, fill team identity/contact fields, and
+  submit the DoraHacks form.
 
 ## Blocked
 
@@ -89,19 +96,19 @@ Replay: `0xb9155eb1eaaf8bee27c1ce6fd55008442d17c006bfa65240f33513467161daff`
 
 Final credential-free run on 2026-08-22:
 
-| Gate                             | Result                                                                         |
-| -------------------------------- | ------------------------------------------------------------------------------ |
-| `pnpm install --frozen-lockfile` | Passed; lockfile already current                                               |
-| `pnpm format:check`              | Passed                                                                         |
-| `pnpm lint`                      | Passed for root scripts and five workspace projects                            |
-| `pnpm typecheck`                 | Passed in strict mode                                                          |
-| `pnpm compile`                   | Passed; Solidity 0.8.28, Cancun target                                         |
-| `pnpm test`                      | Passed: 24 tests (5 Sepolia, 8 Creditcoin, 6 worker, 3 shared, 2 web)          |
-| `pnpm integration:local`         | Passed source success, target escrow settlement, and worker state machine      |
-| `pnpm build`                     | Passed; contracts, shared, worker, and Next.js production build                |
-| `pnpm secret:scan`               | Passed for 103 repository files                                                |
-| `pnpm audit --prod`              | No known vulnerabilities found                                                 |
-| Responsive visual inspection     | Desktop and 500 px mobile breakpoint inspected; narrow title uses fluid sizing |
+| Gate                             | Result                                                                     |
+| -------------------------------- | -------------------------------------------------------------------------- |
+| `pnpm install --frozen-lockfile` | Passed; lockfile already current                                           |
+| `pnpm format:check`              | Passed                                                                     |
+| `pnpm lint`                      | Passed for root scripts and five workspace projects                        |
+| `pnpm typecheck`                 | Passed in strict mode                                                      |
+| `pnpm compile`                   | Passed; Solidity 0.8.28, Cancun target                                     |
+| `pnpm test`                      | Passed: 24 tests (5 Sepolia, 8 Creditcoin, 6 worker, 3 shared, 2 web)      |
+| `pnpm integration:local`         | Passed source success, target escrow settlement, and worker state machine  |
+| `pnpm build`                     | Passed; contracts, shared, worker, and Next.js production build            |
+| `pnpm secret:scan`               | Passed for 103 repository files                                            |
+| `pnpm audit --prod`              | No known vulnerabilities found                                             |
+| Responsive visual inspection     | Desktop and true 390 px device emulation inspected; no horizontal overflow |
 
 The final `pnpm check` command completed successfully after the live evidence/UI changes.
 

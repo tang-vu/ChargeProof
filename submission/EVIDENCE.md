@@ -24,7 +24,12 @@ private key or secret is present in this evidence.
 | Purpose          | Environment | URL                                                                              | Expected result                                        | What it proves                                  |
 | ---------------- | ----------- | -------------------------------------------------------------------------------- | ------------------------------------------------------ | ----------------------------------------------- |
 | Hosted dashboard | Vercel      | [ChargeProof](https://chargeproof-plum.vercel.app)                               | HTTP 200; visible `LIVE TESTNET` badge                 | Public UI bound to deployed contracts           |
-| Public CI        | GitHub      | [Quality gates](https://github.com/tang-vu/ChargeProof/actions/runs/32472627378) | Green clean-runner job for the Gate 2 runner milestone | Reproducibility outside the development machine |
+| Public CI        | GitHub      | [Quality gates](https://github.com/tang-vu/ChargeProof/actions/runs/32545636716) | Green clean-runner job for the verified Gate 2 release | Reproducibility outside the development machine |
+
+Production smoke verification on 2026-08-22 confirmed HTTP 200, the `LIVE TESTNET` badge, the
+historical real-settlement panel, HTTP 400 for malformed attestation input, and a 65-byte EIP-712
+signature from the configured authorized device signer for a fresh valid receipt. The private key
+remained server-only and was neither printed nor returned.
 
 ## Gate 2 — ChargeProof custom vertical slice
 
