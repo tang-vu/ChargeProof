@@ -32,8 +32,9 @@ Last updated: 2026-08-22
 - [x] Seed the dashboard, deck, runbook, and submission materials with project-owned Gate 2 evidence.
 - [x] Build and validate a reproducible 1920×1080 demo-video pipeline with public dashboard/deck
       capture, FFmpeg composition, subtitles, MiMo V2.5 TTS, and MiMo V2.5 ASR quality checks.
-- [ ] Generate the final narration with a replacement, locally configured MiMo credential; review and
-      upload the video; add human team identity before DoraHacks submission.
+- [x] Generate the final narration with a replacement, locally configured MiMo credential; validate
+      every scene with MiMo ASR and render the final 2:56 MP4.
+- [ ] Human playback review and video upload; add team identity before DoraHacks submission.
 
 ## Architecture decisions
 

@@ -31,17 +31,23 @@ pnpm video:visuals
 pnpm video:preview
 pnpm video:audio
 pnpm video:render
+pnpm video:verify
 ```
 
 `video:preview` makes a silent composition check without credentials. `video:audio` generates one WAV
 per scene with `mimo-v2.5-tts`, sends each WAV to `mimo-v2.5-asr`, and fails if the word error rate is
-above `MIMO_ASR_MAX_WER`. `video:render` creates the final H.264/AAC MP4 with an English subtitle track.
+above `MIMO_ASR_MAX_WER`. `video:render` applies bounded, pitch-preserving time compression when a
+scene exceeds its target slot, creates the final H.264/AAC MP4, and adds an English subtitle track.
+`video:verify` then runs MiMo ASR against the post-processed audio extracted from every rendered video
+segment, so the upload candidate—not just the original TTS WAVs—must pass the same threshold.
 
 Outputs are written under `submission/video/generated/`:
 
 - `audio/*.wav`: scene narration;
-- `transcripts/*.txt`: independent ASR transcripts;
+- `transcripts/*.txt`: independent ASR transcripts for source TTS WAVs;
+- `transcripts-rendered/*.txt`: ASR transcripts for final post-processed scene audio;
 - `asr-report.json`: per-scene and aggregate word error rate;
+- `asr-rendered-report.json`: ASR results for the final post-processed segment audio;
 - `visuals/*.png`: public dashboard and deck captures;
 - `captions.srt`: subtitle source;
 - `ChargeProof-demo-preview.mp4`: silent composition check;

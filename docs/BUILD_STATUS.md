@@ -51,20 +51,31 @@ Last updated: 2026-08-22
 - Credential-free silent composition rendered and inspected successfully: 178.02 seconds, 1920×1080,
   H.264 video, 48 kHz stereo AAC, `mov_text` English subtitle track, and nine ordered scenes. Generated
   media is Git-ignored and is not presented as the final narrated demo.
+- Final MiMo V2.5 narration generated with the dedicated `Milo` voice. All nine scene WAVs passed MiMo
+  V2.5 ASR validation at 9.8% aggregate word error rate against an 18% maximum; one failed first take
+  was discarded and regenerated rather than weakening the threshold.
+- Final local upload candidate rendered at 175.72 seconds: 1920×1080 H.264 at 30 fps, 48 kHz mono AAC,
+  English `mov_text` subtitles, 8,748,819 bytes, and SHA-256
+  `bee0d67eaa32c8e201cfdeb5c8ac3a4a7bfdcb9961c1f743b2e43dd8409e84b7`. Audio peak is -0.8 dB,
+  and no silence interval of 1.5 seconds or longer remains. Three representative final frames were
+  visually inspected. The MP4 is Git-ignored pending human playback approval and upload.
+- The final time-compressed audio was extracted back out of all nine rendered video segments and sent
+  through MiMo V2.5 ASR again. Every post-processed segment passed independently at 8.2% aggregate WER;
+  the proof scene transcribed with 0.0% WER. This validates the audio judges will hear, not only the
+  pre-render TTS WAV files.
 
 ## In progress
 
-- Generate and review the MiMo-narrated video after a replacement API credential is configured
-  locally; then perform the human-only upload, team identity/contact, and DoraHacks submission steps.
+- Human playback review and video upload, followed by team identity/contact and DoraHacks submission.
 
 ## Blocked
 
 - None for engineering/evidence. Source verification succeeded through Sourcify and Blockscout.
 - Video recording/upload requires a human recording session and media-hosting credentials.
 - Team identity/contact details and final DoraHacks submission require human input/login.
-- The MiMo key pasted into chat is treated as compromised and was never used. Final TTS/ASR generation
-  is blocked until the user revokes it and sets a replacement `MIMO_API_KEY` locally. The account's
-  Token Plan terms must permit this one-off interactive generation; otherwise use a pay-as-you-go key.
+- The MiMo key pasted into chat was treated as compromised and never used. A replacement key was read
+  only from the Git-ignored local environment for the one-off interactive TTS/ASR run; no key value was
+  printed, serialized, committed, or sent to the browser.
 
 No private key, seed, or credential has been requested or exposed.
 

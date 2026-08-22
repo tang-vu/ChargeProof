@@ -8,6 +8,7 @@ const rootDir = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const sourceFile = path.join(rootDir, 'submission', 'video', 'scenes.json');
 const generatedDir = path.join(rootDir, 'submission', 'video', 'generated');
 const audioDir = path.join(generatedDir, 'audio');
+const renderedAudioDir = path.join(generatedDir, 'rendered-audio');
 const visualDir = path.join(generatedDir, 'visuals');
 const segmentDir = path.join(generatedDir, 'segments');
 const captionsFile = path.join(generatedDir, 'captions.srt');
@@ -22,6 +23,7 @@ const reportFile = path.join(generatedDir, silent ? 'video-preview-report.json' 
 const scenes = JSON.parse(await readFile(sourceFile, 'utf8'));
 validateScenes(scenes);
 await mkdir(segmentDir, { recursive: true });
+if (!silent) await mkdir(renderedAudioDir, { recursive: true });
 
 const rendered = [];
 let timeline = 0;
@@ -31,15 +33,26 @@ for (const scene of scenes) {
   await access(visualFile);
   const audioFile = path.join(audioDir, `${scene.id}.wav`);
   let duration = scene.targetSeconds;
+  let audioTempo = 1;
   if (!silent) {
     await access(audioFile);
     const audioDuration = await probeDuration(audioFile);
-    duration = Math.max(scene.targetSeconds, audioDuration + 0.45);
+    duration = Math.min(scene.targetSeconds, audioDuration + 0.5);
+    const spokenWindow = scene.targetSeconds - 0.45;
+    audioTempo = Math.max(1, audioDuration / spokenWindow);
+    if (audioTempo > 1.4) {
+      throw new Error(
+        `${scene.id}: narration needs ${audioTempo.toFixed(2)}x compression; shorten or regenerate it`,
+      );
+    }
   }
 
   const segmentFile = path.join(segmentDir, `${scene.id}${silent ? '-silent' : ''}.mp4`);
-  await renderSegment({ visualFile, audioFile, segmentFile, duration });
-  rendered.push({ ...scene, duration, segmentFile });
+  await renderSegment({ visualFile, audioFile, segmentFile, duration, audioTempo });
+  if (!silent) {
+    await extractRenderedAudio(segmentFile, path.join(renderedAudioDir, `${scene.id}.wav`));
+  }
+  rendered.push({ ...scene, duration, audioTempo, segmentFile });
   captions.push(...captionEntries(scene.narration, timeline, duration));
   timeline += duration;
   console.log(`${scene.id}: rendered ${duration.toFixed(2)} seconds`);
@@ -111,14 +124,20 @@ const report = {
   videoCodec: 'H.264',
   audioCodec: 'AAC',
   subtitleCodec: 'mov_text',
-  scenes: rendered.map(({ id, title, duration, visual }) => ({ id, title, duration, visual })),
+  scenes: rendered.map(({ id, title, duration, audioTempo, visual }) => ({
+    id,
+    title,
+    duration,
+    audioTempo,
+    visual,
+  })),
 };
 await writeFile(reportFile, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
 console.log(
   `${silent ? 'Silent preview' : 'Final MiMo-narrated video'} ready: ${path.relative(rootDir, outputFile)} (${outputDuration.toFixed(2)}s)`,
 );
 
-async function renderSegment({ visualFile, audioFile, segmentFile, duration }) {
+async function renderSegment({ visualFile, audioFile, segmentFile, duration, audioTempo }) {
   const fadeOutStart = Math.max(0, duration - 0.25).toFixed(3);
   const videoFilter = [
     'scale=1920:1080:force_original_aspect_ratio=decrease',
@@ -129,6 +148,8 @@ async function renderSegment({ visualFile, audioFile, segmentFile, duration }) {
     'format=yuv420p',
   ].join(',');
   const audioFilter = [
+    `atempo=${audioTempo.toFixed(6)}`,
+    'volume=-1dB',
     'apad',
     `atrim=0:${duration.toFixed(3)}`,
     'afade=t=in:st=0:d=0.15',
@@ -196,6 +217,26 @@ async function probeDuration(filename) {
     throw new Error(`Could not determine media duration for ${filename}`);
   }
   return duration;
+}
+
+async function extractRenderedAudio(segmentFile, outputFile) {
+  await runCommand(ffmpeg, [
+    '-hide_banner',
+    '-loglevel',
+    'error',
+    '-y',
+    '-i',
+    segmentFile,
+    '-map',
+    '0:a:0',
+    '-c:a',
+    'pcm_s16le',
+    '-ar',
+    '48000',
+    '-ac',
+    '1',
+    outputFile,
+  ]);
 }
 
 function captionEntries(narration, sceneStart, sceneDuration) {

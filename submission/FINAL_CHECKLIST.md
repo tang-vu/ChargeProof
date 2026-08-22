@@ -52,10 +52,13 @@
 - [x] 1920×1080 visual capture and FFmpeg composition pipeline
 - [x] MiMo V2.5 TTS plus ASR transcript/WER validation pipeline
 - [x] Silent 178-second codec, timeline, and subtitle preview inspected
+- [x] Final 175.72-second MiMo narration generated; all nine ASR checks passed
+- [x] Post-processed audio extracted from all nine MP4 segments and revalidated at 8.2% aggregate WER
+- [x] Final MP4 codec, duration, subtitle, peak level, silence, checksum, and frames verified
 - [x] Judging matrix and evidence schema
 - [x] Deck rendered to PDF
 - [x] Deck PDF uploaded to a stable public GitHub URL
-- [ ] Final MiMo narration generated, reviewed, and uploaded by a human
+- [ ] Final MP4 playback reviewed and uploaded by a human
 - [x] Repository visibility confirmed public
 - [x] Live frontend deployed with authorized hosting credentials and live-testnet evidence
 - [ ] Team names, bios, video URL, and remaining human-only placeholders filled

@@ -34,7 +34,8 @@
     "video:audio": "node scripts/mimo-video-audio.mjs",
     "video:preview": "node scripts/render-demo-video.mjs --silent",
     "video:render": "node scripts/render-demo-video.mjs",
-    "video:all": "pnpm video:visuals && pnpm video:audio && pnpm video:render",
+    "video:verify": "node scripts/mimo-video-audio.mjs --asr-only --rendered",
+    "video:all": "pnpm video:visuals && pnpm video:audio && pnpm video:render && pnpm video:verify",
     "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm compile && pnpm test && pnpm integration:local && pnpm build && pnpm secret:scan"
   },
   "devDependencies": {

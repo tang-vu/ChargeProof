@@ -8,9 +8,10 @@ const rootDir = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 dotenv.config({ path: path.join(rootDir, '.env'), quiet: true });
 const sourceFile = path.join(rootDir, 'submission', 'video', 'scenes.json');
 const generatedDir = path.join(rootDir, 'submission', 'video', 'generated');
-const audioDir = path.join(generatedDir, 'audio');
-const transcriptDir = path.join(generatedDir, 'transcripts');
-const reportFile = path.join(generatedDir, 'asr-report.json');
+const rendered = process.argv.includes('--rendered');
+const audioDir = path.join(generatedDir, rendered ? 'rendered-audio' : 'audio');
+const transcriptDir = path.join(generatedDir, rendered ? 'transcripts-rendered' : 'transcripts');
+const reportFile = path.join(generatedDir, rendered ? 'asr-rendered-report.json' : 'asr-report.json');
 
 const apiKey = process.env.MIMO_API_KEY;
 const baseUrl = (process.env.MIMO_BASE_URL ?? 'https://api.xiaomimimo.com/v1').replace(/\/$/, '');
@@ -34,6 +35,9 @@ if (!Number.isFinite(maximumWordErrorRate) || maximumWordErrorRate < 0) {
 }
 if (!['authorization', 'api-key'].includes(authMode)) {
   throw new Error('MIMO_AUTH_HEADER must be either authorization or api-key');
+}
+if (rendered && requestedMode !== 'asr') {
+  throw new Error('--rendered is valid only together with --asr-only');
 }
 
 const scenes = JSON.parse(await readFile(sourceFile, 'utf8'));
@@ -85,6 +89,7 @@ if (requestedMode !== 'tts') {
     generatedAt: new Date().toISOString(),
     ttsModel: 'mimo-v2.5-tts',
     asrModel: 'mimo-v2.5-asr',
+    audioSource: rendered ? 'rendered video segments' : 'source TTS WAV files',
     voice,
     maximumWordErrorRate,
     aggregateWordErrorRate,
