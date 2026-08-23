@@ -3,6 +3,56 @@
 Copy-ready text for BUIDL CTC 2026 Fall. Replace bracketed placeholders only with verified public
 values before submission.
 
+## DoraHacks BUIDL Profile
+
+### BUIDL (project) name
+
+ChargeProof
+
+### BUIDL logo
+
+Upload `submission/assets/chargeproof-logo.png`. It is a 480 x 480 PNG derived from the dashboard's
+existing cyan/lime energy mark and is kept below the 2 MB form limit.
+
+### Vision
+
+EV charging roaming depends on fragmented networks of drivers, charge point operators, mobility
+providers, and payment systems that do not share one trusted settlement record. An operator should
+not have to trust a centralized relayer's claim that a remote charging transaction occurred, while a
+driver should not pay more than the metered session authorized in advance.
+
+ChargeProof creates an evidence-bound settlement rail. A driver escrows a maximum payment on
+Creditcoin Testnet, and an authorized charging device signs a deterministic receipt that the driver
+anchors through a canonical contract on Ethereum Sepolia. Creditcoin releases the exact operator
+payment and refunds unused escrow only after Attestcoin cryptographically verifies the source
+transaction and ChargeProof revalidates its contract, selector, sender, receipt, device signature,
+intent, tariff, amount, expiry, and replay state.
+
+The hackathon MVP uses a clearly labeled virtual charger, but the settlement primitive is designed to
+extend to physical EVSE hardware, solar microgrids, telecom, battery swapping, and other metered DePIN
+infrastructure. Attestcoin is essential: removing it removes the authenticated bridge between the
+Sepolia charging receipt and Creditcoin settlement.
+
+### Category
+
+Select `DePIN`. If the profile category list does not expose `DePIN`, select `Infrastructure` and keep
+the hackathon track set to `DePIN`.
+
+### Links
+
+- GitHub/GitLab/Bitbucket: `https://github.com/tang-vu/ChargeProof`
+- Project website: `https://chargeproof-plum.vercel.app`
+- Demo video: `[YOUTUBE_UNLISTED_VIDEO_URL]`
+
+### Social links
+
+- `https://github.com/tang-vu`
+- `[X_OR_TWITTER_PROFILE_URL]`
+- `[LINKEDIN_PROFILE_URL]`
+
+Use the public GitHub profile as the required verified social link. Add X and LinkedIn only when the
+real profile URLs are available; never create or invent accounts solely to fill optional rows.
+
 ## Project Name
 
 ChargeProof

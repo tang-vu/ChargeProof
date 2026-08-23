@@ -1,6 +1,6 @@
 # ChargeProof execution plan
 
-Last updated: 2026-08-22
+Last updated: 2026-08-23
 
 ## Gate 1 — official proof spike
 
@@ -34,6 +34,7 @@ Last updated: 2026-08-22
       capture, FFmpeg composition, subtitles, MiMo V2.5 TTS, and MiMo V2.5 ASR quality checks.
 - [x] Generate the final narration with a replacement, locally configured MiMo credential; validate
       every scene with MiMo ASR and render the final 2:56 MP4.
+- [x] Prepare the DoraHacks BUIDL profile copy and a validated 480 x 480 project logo under 2 MB.
 - [ ] Human playback review and video upload; add team identity before DoraHacks submission.
 
 ## Architecture decisions

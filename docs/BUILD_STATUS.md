@@ -1,6 +1,6 @@
 # Build status
 
-Last updated: 2026-08-22
+Last updated: 2026-08-23
 
 ## Completed
 
@@ -63,6 +63,9 @@ Last updated: 2026-08-22
   through MiMo V2.5 ASR again. Every post-processed segment passed independently at 8.2% aggregate WER;
   the proof scene transcribed with 0.0% WER. This validates the audio judges will hear, not only the
   pre-render TTS WAV files.
+- DoraHacks BUIDL profile fields were prepared in copy-ready English. The project logo was derived
+  from the dashboard's existing energy mark and visually inspected at the required 480 x 480 size;
+  the optimized PNG is 74,731 bytes, safely below the 2 MB upload limit.
 
 ## In progress
 
