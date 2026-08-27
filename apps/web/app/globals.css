@@ -10,7 +10,7 @@
   --cyan-soft: #173f48;
   --lime: #c8ff45;
   --danger: #ff6b68;
-  --font-body: 'Manrope', sans-serif;
+  --font-body: 'Manrope Variable', sans-serif;
   --font-mono: 'IBM Plex Mono', monospace;
 }
 
@@ -117,6 +117,14 @@ main {
   display: flex;
   gap: 10px;
   align-items: center;
+}
+.evidence-nav {
+  color: var(--cyan);
+  font: 500 9px var(--font-mono);
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 10px 5px;
 }
 .mode-pill {
   font: 500 10px/1 var(--font-mono);
@@ -294,6 +302,74 @@ h1 em {
   font-size: 12px;
   min-width: 0;
   overflow-wrap: anywhere;
+}
+.judge-proof {
+  border: 1px solid rgba(200, 255, 69, 0.3);
+  background: linear-gradient(135deg, rgba(200, 255, 69, 0.055), rgba(66, 233, 245, 0.025));
+  padding: 24px;
+}
+.judge-proof-heading,
+.judge-proof-footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 28px;
+}
+.judge-proof-heading h2 {
+  margin: 8px 0 0;
+  font-size: clamp(24px, 2.7vw, 38px);
+  letter-spacing: -0.045em;
+}
+.proof-verdict {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: var(--lime);
+  flex: 0 0 auto;
+}
+.proof-verdict div {
+  display: grid;
+  gap: 5px;
+}
+.proof-verdict b,
+.proof-verdict small {
+  font: 600 9px var(--font-mono);
+  letter-spacing: 0.1em;
+}
+.proof-verdict small {
+  color: var(--muted);
+  font-size: 8px;
+}
+.judge-proof-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  margin-top: 20px;
+}
+.judge-proof-footer {
+  align-items: center;
+  margin-top: 16px;
+}
+.judge-proof-footer p {
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.65;
+  margin: 0;
+  max-width: 640px;
+}
+.judge-proof-footer code {
+  color: var(--lime);
+  font-family: var(--font-mono);
+}
+.judge-proof-links {
+  display: flex;
+  gap: 8px;
+}
+.judge-proof-links .explorer-link {
+  min-width: 170px;
+  margin-top: 0;
 }
 .workflow {
   padding: 42px 0 88px;
@@ -944,6 +1020,20 @@ pre {
   .trust-grid {
     grid-template-columns: 1fr;
   }
+  .judge-proof-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .judge-proof-footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .judge-proof-links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .judge-proof-links .explorer-link {
+    min-width: 0;
+  }
 }
 
 @media (max-width: 640px) {
@@ -954,6 +1044,9 @@ pre {
     height: 72px;
   }
   .mode-pill {
+    display: none;
+  }
+  .evidence-nav {
     display: none;
   }
   .wallet-button span {
@@ -1000,6 +1093,17 @@ pre {
     align-items: flex-start;
     flex-direction: column;
     gap: 6px;
+  }
+  .judge-proof {
+    padding: 18px;
+  }
+  .judge-proof-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .judge-proof-grid,
+  .judge-proof-links {
+    grid-template-columns: 1fr;
   }
   .section-heading {
     align-items: flex-start;

@@ -149,7 +149,7 @@ async function renderSegment({ visualFile, audioFile, segmentFile, duration, aud
   ].join(',');
   const audioFilter = [
     `atempo=${audioTempo.toFixed(6)}`,
-    'volume=-1dB',
+    'loudnorm=I=-16:LRA=7:TP=-1.5',
     'apad',
     `atrim=0:${duration.toFixed(3)}`,
     'afade=t=in:st=0:d=0.15',

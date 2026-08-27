@@ -1,6 +1,6 @@
 # ChargeProof execution plan
 
-Last updated: 2026-08-23
+Last updated: 2026-08-26
 
 ## Gate 1 — official proof spike
 
@@ -33,9 +33,26 @@ Last updated: 2026-08-23
 - [x] Build and validate a reproducible 1920×1080 demo-video pipeline with public dashboard/deck
       capture, FFmpeg composition, subtitles, MiMo V2.5 TTS, and MiMo V2.5 ASR quality checks.
 - [x] Generate the final narration with a replacement, locally configured MiMo credential; validate
-      every scene with MiMo ASR and render the final 2:56 MP4.
+      every scene with MiMo ASR and render the final 2:55 MP4.
+- [x] Regenerate the upload candidate with truthful unaudited wording, clearer high-WER scenes,
+      normalized loudness, refreshed 25-test deck visuals, and post-render ASR validation.
 - [x] Prepare the DoraHacks BUIDL profile copy and a validated 480 x 480 project logo under 2 MB.
 - [ ] Human playback review and video upload; add team identity before DoraHacks submission.
+
+## Hackathon readiness hardening — 2026-08-26
+
+- [x] Re-audit the official event requirements and the emerging public competitive field.
+- [x] Put project-owned source, settlement, proof, accounting, and replay evidence above the interactive
+      workflow so judges can verify the result before connecting a wallet.
+- [x] Add a credential-free `pnpm judge:verify` path that combines public-chain evidence verification
+      with the local vertical-slice integration test.
+- [x] Harden public evidence reads against transient RPC failures with bounded retries, serialized
+      historical queries, and a Creditcoin Blockscout RPC fallback.
+- [x] Remove build-time Google Fonts access by bundling self-hosted font packages.
+- [x] Add Open Graph/Twitter metadata, a generated 1200×630 social card, and an application icon.
+- [x] Expand adversarial coverage for reused device nonces, tariff mismatch, nondeterministic session
+      IDs, and incorrect metering math.
+- [ ] Human-review and publicly host the final MP4, fill team identity/contact, and submit DoraHacks.
 
 ## Architecture decisions
 

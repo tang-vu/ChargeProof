@@ -1,5 +1,28 @@
 # Judging matrix
 
+## Judge fast path
+
+1. Open the [live dashboard](https://chargeproof-plum.vercel.app) and use the project-owned evidence
+   strip to inspect source, settlement, and mined replay-revert transactions without connecting a
+   wallet.
+2. Run `pnpm judge:verify` with no credentials. It re-reads the deployed runtime code, receipts,
+   settled intent, station accounting, and replay marker from public RPCs, then executes the local
+   vertical slice.
+3. Read `docs/THREAT_MODEL.md` for the exact boundary between Attestcoin, ChargeProof business rules,
+   and simulated hardware.
+
+## Scorecard and remaining deductions
+
+| Area                 | Evidence that earns points                                                                                  | Honest deduction / mitigation                                                                                           |
+| -------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Attestcoin necessity | Settlement cannot execute without native proof verification; real custom proof accepted                     | Attestcoin proves chain inclusion, not electricity; device signature is labeled as the MVP physical boundary            |
+| Functional depth     | Funded intent, source receipt, proof, settlement, refund accounting, metrics, and replay rejection are live | A fresh interactive run needs two testnet wallets and attestation wait time; historical evidence is visible immediately |
+| DePIN fit            | Metered EV infrastructure drives cross-chain payment and incentives                                         | Charger is a simulator; secure-element and OCPP/OCPI pilot remain roadmap work                                          |
+| Security             | Dual-chain validation, three replay domains, pull claims, immutable bindings, adversarial tests             | No independent audit; production use is explicitly blocked pending one                                                  |
+| Reproducibility      | Public source verification, clean CI, one-command credential-free judge verification                        | Public RPCs can be transient; verifier now retries and uses an explorer-backed fallback while failing closed            |
+| Product polish       | Responsive live dashboard, evidence-first UX, deck, narrated video candidate, social preview                | Final video hosting and team identity require human account access before submission                                    |
+| Ecosystem value      | Reusable authenticated metered-receipt primitive and concrete CEIP roadmap                                  | No physical pilot or signed operator LOI is claimed                                                                     |
+
 ## Hackathon requirements
 
 | Requirement                       | ChargeProof response                                                                                            | Evidence                                                    | Status                                         |

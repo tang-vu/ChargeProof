@@ -10,6 +10,9 @@
 - [x] Resumable proof worker with diagnostics and retries
 - [x] Resumable credentialed Gate 2 runner and machine-readable evidence writer
 - [x] Responsive dashboard with explicit live/local modes
+- [x] Above-the-fold project-owned evidence with no-wallet explorer links
+- [x] Credential-free `pnpm judge:verify` public evidence and local integration path
+- [x] Self-hosted web fonts and generated social preview metadata
 - [x] Source/intent/device/amount/expiry/replay validation
 - [x] Unit tests mock only the native precompile boundary
 - [x] Gate 2 project-owned testnet vertical slice
@@ -52,8 +55,8 @@
 - [x] 1920×1080 visual capture and FFmpeg composition pipeline
 - [x] MiMo V2.5 TTS plus ASR transcript/WER validation pipeline
 - [x] Silent 178-second codec, timeline, and subtitle preview inspected
-- [x] Final 175.72-second MiMo narration generated; all nine ASR checks passed
-- [x] Post-processed audio extracted from all nine MP4 segments and revalidated at 8.2% aggregate WER
+- [x] Final 174.90-second MiMo narration generated; all nine ASR checks passed
+- [x] Post-processed audio extracted from all nine MP4 segments and revalidated at 5.7% aggregate WER
 - [x] Final MP4 codec, duration, subtitle, peak level, silence, checksum, and frames verified
 - [x] Judging matrix and evidence schema
 - [x] Deck rendered to PDF

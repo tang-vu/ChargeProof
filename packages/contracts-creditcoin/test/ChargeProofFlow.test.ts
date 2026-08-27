@@ -361,6 +361,39 @@ describe('ChargeProof Creditcoin vertical slice', function () {
     await expect(verifier.verifyAndSettle(proof())).to.be.revertedWithCustomError(verifier, 'Replay');
   });
 
+  it('revalidates tariff, session identity, and exact metering math', async function () {
+    const { verifier, receipt, proof, encodeTransaction, sourceRegistry, device } = await setup();
+    const domain = {
+      name: 'ChargeProof Device Receipt',
+      version: '1',
+      chainId: 11_155_111,
+      verifyingContract: sourceRegistry.address,
+    };
+
+    async function expectReceiptError(
+      candidate: typeof receipt,
+      customError: 'IncorrectTariff' | 'InvalidSessionId' | 'IncorrectAmount',
+    ) {
+      const candidateSignature = await device.signTypedData(domain, receiptTypes, candidate);
+      await expect(
+        verifier.verifyAndSettle(
+          proof(encodeTransaction({ receipt: candidate, deviceSignature: candidateSignature })),
+        ),
+      ).to.be.revertedWithCustomError(verifier, customError);
+    }
+
+    await expectReceiptError(
+      {
+        ...receipt,
+        tariff: receipt.tariff + 1n,
+        finalAmount: (receipt.energyWh * (receipt.tariff + 1n) + 999n) / 1_000n,
+      },
+      'IncorrectTariff',
+    );
+    await expectReceiptError({ ...receipt, sessionId: `0x${'88'.repeat(32)}` }, 'InvalidSessionId');
+    await expectReceiptError({ ...receipt, finalAmount: receipt.finalAmount + 1n }, 'IncorrectAmount');
+  });
+
   it('allows only the driver to refund after expiry plus attestation grace', async function () {
     const { ethers, driver, outsider, escrow, expiresAt } = await setup();
     await expect(escrow.connect(outsider).refundExpired(intentId)).to.be.revertedWithCustomError(

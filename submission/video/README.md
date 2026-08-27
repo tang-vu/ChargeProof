@@ -35,9 +35,11 @@ pnpm video:verify
 ```
 
 `video:preview` makes a silent composition check without credentials. `video:audio` generates one WAV
-per scene with `mimo-v2.5-tts`, sends each WAV to `mimo-v2.5-asr`, and fails if the word error rate is
-above `MIMO_ASR_MAX_WER`. `video:render` applies bounded, pitch-preserving time compression when a
-scene exceeds its target slot, creates the final H.264/AAC MP4, and adds an English subtitle track.
+per scene with `mimo-v2.5-tts`, sends each WAV to `mimo-v2.5-asr`, retries transient API failures, and
+fails if the word error rate is above `MIMO_ASR_MAX_WER`. A bad take can be regenerated alone with
+`pnpm video:audio -- --force --tts-only --scene=<id>`. `video:render` applies bounded,
+pitch-preserving time compression and loudness normalization when a scene exceeds its target slot,
+creates the final H.264/AAC MP4, and adds an English subtitle track.
 `video:verify` then runs MiMo ASR against the post-processed audio extracted from every rendered video
 segment, so the upload candidate—not just the original TTS WAVs—must pass the same threshold.
 

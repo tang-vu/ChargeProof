@@ -129,12 +129,37 @@ describe('ChargingSessionRegistry', function () {
   });
 
   it('rejects duplicate sessions and device nonces', async function () {
-    const { driver, registry, receipt, signature } = await setup();
+    const { driver, device, ethers, registry, receipt, signature } = await setup();
     await registry.connect(driver).finalizeSession(receipt, signature);
     await expect(registry.connect(driver).finalizeSession(receipt, signature)).to.be.revertedWithCustomError(
       registry,
       'DuplicateSession',
     );
+
+    const reusedNonce = {
+      ...receipt,
+      startedAt: receipt.startedAt + 1n,
+      endedAt: receipt.endedAt + 1n,
+    };
+    reusedNonce.sessionId = ethers.keccak256(
+      ethers.AbiCoder.defaultAbiCoder().encode(
+        ['bytes32', 'bytes32', 'address', 'uint64', 'uint64'],
+        [intentId, stationId, driver.address, reusedNonce.startedAt, reusedNonce.nonce],
+      ),
+    );
+    const reusedNonceSignature = await device.signTypedData(
+      {
+        name: 'ChargeProof Device Receipt',
+        version: '1',
+        chainId: (await ethers.provider.getNetwork()).chainId,
+        verifyingContract: await registry.getAddress(),
+      },
+      receiptTypes,
+      reusedNonce,
+    );
+    await expect(
+      registry.connect(driver).finalizeSession(reusedNonce, reusedNonceSignature),
+    ).to.be.revertedWithCustomError(registry, 'DuplicateDeviceNonce');
   });
 
   it('restricts station configuration to the owner', async function () {

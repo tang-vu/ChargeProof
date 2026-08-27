@@ -15,6 +15,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "integration:local": "pnpm --filter @chargeproof/contracts-sepolia exec hardhat test --grep \"finalizes a deterministic\" && pnpm --filter @chargeproof/contracts-creditcoin exec hardhat test --grep \"escrows, verifies, settles\" && pnpm --filter @chargeproof/attestation-worker test",
+    "judge:verify": "pnpm evidence:verify && pnpm integration:local",
     "lint": "pnpm lint:root && pnpm prepare:workspace && pnpm -r --if-present lint",
     "lint:root": "eslint eslint.config.mjs scripts/*.mjs",
     "prepare:workspace": "pnpm --filter @chargeproof/shared build && pnpm --filter @chargeproof/attestation-worker build",

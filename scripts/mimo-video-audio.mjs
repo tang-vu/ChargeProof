@@ -19,6 +19,8 @@ const authMode = (process.env.MIMO_AUTH_HEADER ?? 'authorization').toLowerCase()
 const voice = process.env.MIMO_TTS_VOICE ?? 'Milo';
 const maximumWordErrorRate = Number(process.env.MIMO_ASR_MAX_WER ?? '0.18');
 const force = process.argv.includes('--force');
+const sceneArgument = process.argv.find((argument) => argument.startsWith('--scene='));
+const selectedSceneId = sceneArgument?.slice('--scene='.length);
 const requestedMode = process.argv.includes('--tts-only')
   ? 'tts'
   : process.argv.includes('--asr-only')
@@ -39,9 +41,14 @@ if (!['authorization', 'api-key'].includes(authMode)) {
 if (rendered && requestedMode !== 'asr') {
   throw new Error('--rendered is valid only together with --asr-only');
 }
+if (selectedSceneId && requestedMode !== 'tts') {
+  throw new Error('--scene is supported only together with --tts-only');
+}
 
-const scenes = JSON.parse(await readFile(sourceFile, 'utf8'));
-validateScenes(scenes);
+const allScenes = JSON.parse(await readFile(sourceFile, 'utf8'));
+validateScenes(allScenes);
+const scenes = selectedSceneId ? allScenes.filter((scene) => scene.id === selectedSceneId) : allScenes;
+if (scenes.length === 0) throw new Error(`Unknown scene id: ${selectedSceneId}`);
 await mkdir(audioDir, { recursive: true });
 await mkdir(transcriptDir, { recursive: true });
 
@@ -111,7 +118,7 @@ async function synthesize(text) {
       {
         role: 'user',
         content:
-          'Confident technology documentary narration in neutral international English. Precise, energetic but restrained, with clear blockchain terminology and a medium-fast pace.',
+          'Confident technology documentary narration in neutral international English. Precise, energetic but restrained, with clear blockchain terminology and a medium-fast pace. Pronounce Attestcoin as uh-TEST-coin, Creditcoin as CREDIT-coin, and ChargeProof as Charge Proof.',
       },
       { role: 'assistant', content: text },
     ],
@@ -161,24 +168,52 @@ async function callMiMo(payload, operation) {
   if (authMode === 'api-key') headers['api-key'] = apiKey;
   else headers.authorization = `Bearer ${apiKey}`;
 
-  let response;
-  try {
-    response = await fetch(`${baseUrl}/chat/completions`, {
-      method: 'POST',
-      headers,
-      body: JSON.stringify(payload),
-      signal: AbortSignal.timeout(180_000),
-    });
-  } catch (error) {
-    const message = error instanceof Error ? error.message : 'network request failed';
-    throw new Error(`MiMo ${operation} request failed: ${message}`, { cause: error });
-  }
-  if (!response.ok) {
+  for (let attempt = 1; attempt <= 3; attempt += 1) {
+    let response;
+    try {
+      response = await fetch(`${baseUrl}/chat/completions`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(payload),
+        signal: AbortSignal.timeout(180_000),
+      });
+    } catch (error) {
+      if (attempt < 3) {
+        console.warn(`MiMo ${operation} network attempt ${attempt} failed; retrying.`);
+        await delay(attempt * 2_000);
+        continue;
+      }
+      const message = error instanceof Error ? error.message : 'network request failed';
+      throw new Error(`MiMo ${operation} request failed after ${attempt} attempts: ${message}`, {
+        cause: error,
+      });
+    }
+    if (response.ok) {
+      try {
+        return await response.json();
+      } catch (error) {
+        if (attempt < 3) {
+          console.warn(`MiMo ${operation} response attempt ${attempt} timed out; retrying.`);
+          await delay(attempt * 2_000);
+          continue;
+        }
+        const message = error instanceof Error ? error.message : 'response body could not be read';
+        throw new Error(`MiMo ${operation} response failed after ${attempt} attempts: ${message}`, {
+          cause: error,
+        });
+      }
+    }
+
     const body = await safeJson(response);
     const reason = body?.error?.message ?? body?.message ?? response.statusText;
+    if ((response.status === 429 || response.status >= 500) && attempt < 3) {
+      console.warn(`MiMo ${operation} returned HTTP ${response.status}; retrying.`);
+      await delay(attempt * 2_000);
+      continue;
+    }
     throw new Error(`MiMo ${operation} returned HTTP ${response.status}: ${String(reason)}`);
   }
-  return response.json();
+  throw new Error(`MiMo ${operation} exhausted retry attempts`);
 }
 
 async function safeJson(response) {
@@ -187,6 +222,10 @@ async function safeJson(response) {
   } catch {
     return undefined;
   }
+}
+
+function delay(milliseconds) {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
 }
 
 function compareText(expected, actual) {
@@ -204,12 +243,15 @@ function compareText(expected, actual) {
 function normalize(value) {
   return value
     .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')
     .replaceAll('u s d c', 'usdc')
     .replaceAll('s d k', 'sdk')
     .replaceAll('m v p', 'mvp')
     .replaceAll('o c p p', 'ocpp')
     .replaceAll('o c p i', 'ocpi')
-    .replace(/[^a-z0-9]+/g, ' ')
+    .replaceAll('eleven million five hundred thirty nine thousand eight hundred seventy four', '11 539 874')
+    .replaceAll('one point four seven', '1 47')
+    .replaceAll('three point five three', '3 53')
     .trim()
     .split(/\s+/)
     .filter(Boolean);

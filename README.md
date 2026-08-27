@@ -19,6 +19,23 @@ Official-example Gate 1 evidence remains clearly separated from ChargeProof-owne
 project-owned Sepolia and Creditcoin Testnet deployments and seeded with a clearly labeled previous
 real settlement.
 
+## Judge fast path — no keys required
+
+The hosted dashboard exposes the project-owned source, settlement, and rejected-replay transactions
+before any wallet interaction. To independently re-read all five deployed contracts, transaction
+statuses, settled accounting, station metrics, and replay marker—and then exercise the local vertical
+slice—run:
+
+```bash
+pnpm install --frozen-lockfile
+pnpm judge:verify
+```
+
+This command is read-only on public testnets. It never requests a wallet or private key. RPC checks
+retry transient failures and use the public Creditcoin Blockscout RPC as a fallback to the official
+testnet endpoint. The local integration portion is explicitly a simulation and mocks only the native
+`0x0FD2` boundary.
+
 ## The real-world problem
 
 EV roaming joins drivers, charge point operators, mobility providers, and payment rails that do not

@@ -472,6 +472,9 @@ export function ChargeProofDashboard() {
           </span>
         </a>
         <div className="topbar-actions">
+          <a className="evidence-nav" href="#live-evidence">
+            View live proof ↓
+          </a>
           <span className={`mode-pill ${liveMode ? 'live' : 'local'}`}>
             <span className="status-dot" /> {liveMode ? 'LIVE TESTNET' : 'LOCAL SIMULATION'}
           </span>
@@ -529,13 +532,58 @@ export function ChargeProofDashboard() {
         )}
       </section>
 
+      <section className="judge-proof shell" id="live-evidence" aria-labelledby="live-evidence-title">
+        <div className="judge-proof-heading">
+          <div>
+            <span className="kicker">PROJECT-OWNED TESTNET EVIDENCE</span>
+            <h2 id="live-evidence-title">Verified end to end. Replay rejected.</h2>
+          </div>
+          <div className="proof-verdict">
+            <span className="status-dot" />
+            <div>
+              <b>LIVE FLOW CONFIRMED</b>
+              <small>22 AUG 2026 · PUBLICLY REPRODUCIBLE</small>
+            </div>
+          </div>
+        </div>
+        <div className="judge-proof-grid">
+          <Stat label="Metered session" value="4.20 kWh" />
+          <Stat label="Attestcoin proof" value="2,336 bytes · 7 / 7" />
+          <Stat label="Escrow outcome" value="1.47 paid · 3.53 refunded" />
+          <Stat label="Replay defense" value="Mined revert · block 5,351,718" />
+        </div>
+        <div className="judge-proof-footer">
+          <p>
+            Five deployed contracts, a successful source receipt, settled escrow, and an unchanged replay
+            state can be re-read from public RPCs with <code>pnpm evidence:verify</code>.
+          </p>
+          <div className="judge-proof-links">
+            <ExplorerLink
+              network="sepolia"
+              hash={historicalSettlement.sourceTransactionHash}
+              label="Source receipt"
+            />
+            <ExplorerLink
+              network="creditcoin-testnet"
+              hash={historicalSettlement.settlementTransactionHash}
+              label="Settlement"
+            />
+            <ExplorerLink
+              network="creditcoin-testnet"
+              hash={historicalSettlement.replayTransactionHash}
+              label="Rejected replay"
+            />
+          </div>
+        </div>
+      </section>
+
       <section className="workflow shell" aria-label="ChargeProof workflow">
         <div className="section-heading">
           <div>
             <span className="kicker">LIVE CONTROL PLANE</span>
             <h2>One intent. Two chains. One proof.</h2>
           </div>
-          <div className={`action-state ${action.error ? 'error' : ''}`}>
+          <div className={`action-state ${action.error ? 'error' : ''}`} aria-live="polite">
             <span className="pulse" />
             <div>
               <b>{action.label}</b>

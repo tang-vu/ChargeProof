@@ -2,7 +2,10 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
-import { Contract, Interface, JsonRpcProvider, getAddress } from 'ethers';
+import { Contract, FallbackProvider, FetchRequest, Interface, JsonRpcProvider, getAddress } from 'ethers';
+
+const RPC_ATTEMPTS = 3;
+const RPC_TIMEOUT_MS = 15_000;
 
 const repositoryRoot = path.resolve(import.meta.dirname, '..');
 const [sepoliaDeployment, creditcoinDeployment, evidence] = await Promise.all([
@@ -15,38 +18,36 @@ assert.equal(sepoliaDeployment.status, 'deployed');
 assert.equal(creditcoinDeployment.status, 'deployed');
 assert.equal(evidence.status, 'complete');
 
-const sepolia = new JsonRpcProvider(
-  process.env.SEPOLIA_RPC_URL ?? 'https://ethereum-sepolia-rpc.publicnode.com',
+const sepolia = createProvider(
+  process.env.SEPOLIA_RPC_URL
+    ? [process.env.SEPOLIA_RPC_URL]
+    : ['https://ethereum-sepolia-rpc.publicnode.com'],
   11_155_111,
-  { staticNetwork: true },
 );
-const creditcoin = new JsonRpcProvider(
-  process.env.CREDITCOIN_TESTNET_RPC_URL ?? 'https://rpc.cc3-testnet.creditcoin.network',
+const creditcoin = createProvider(
+  process.env.CREDITCOIN_TESTNET_RPC_URL
+    ? [process.env.CREDITCOIN_TESTNET_RPC_URL]
+    : ['https://rpc.cc3-testnet.creditcoin.network', 'https://creditcoin-testnet.blockscout.com/api/eth-rpc'],
   102_031,
-  { staticNetwork: true },
 );
 
 const sourceRegistry = getAddress(sepoliaDeployment.contracts.chargingSessionRegistry);
 const verifierAddress = getAddress(creditcoinDeployment.contracts.attestcoinChargeVerifier);
 const driver = getAddress(evidence.driver);
 
-await Promise.all([
-  assertChain(sepolia, 11_155_111, 'Sepolia'),
-  assertChain(creditcoin, 102_031, 'Creditcoin Testnet'),
-  assertCode(sepolia, sourceRegistry),
-  ...Object.values(creditcoinDeployment.contracts).map((address) =>
-    assertCode(creditcoin, getAddress(address)),
-  ),
-]);
+await assertChain(sepolia, 11_155_111, 'Sepolia');
+await assertChain(creditcoin, 102_031, 'Creditcoin Testnet');
+await assertCode(sepolia, sourceRegistry);
+for (const address of Object.values(creditcoinDeployment.contracts)) {
+  await assertCode(creditcoin, getAddress(address));
+}
 
-await Promise.all([
-  ...Object.values(sepoliaDeployment.transactions).map((hash) =>
-    assertReceipt(sepolia, hash, 1, 'Sepolia deployment'),
-  ),
-  ...Object.values(creditcoinDeployment.transactions).map((hash) =>
-    assertReceipt(creditcoin, hash, 1, 'Creditcoin deployment'),
-  ),
-]);
+for (const hash of Object.values(sepoliaDeployment.transactions)) {
+  await assertReceipt(sepolia, hash, 1, 'Sepolia deployment');
+}
+for (const hash of Object.values(creditcoinDeployment.transactions)) {
+  await assertReceipt(creditcoin, hash, 1, 'Creditcoin deployment');
+}
 
 const [
   intentReceipt,
@@ -60,8 +61,8 @@ const [
   assertReceipt(sepolia, evidence.transactions.source, 1, 'source receipt'),
   assertReceipt(creditcoin, evidence.transactions.settlement, 1, 'settlement'),
   assertReceipt(creditcoin, evidence.transactions.replay, 0, 'replay'),
-  sepolia.getTransaction(evidence.transactions.source),
-  creditcoin.getTransaction(evidence.transactions.settlement),
+  retryRpc('source transaction', () => sepolia.getTransaction(evidence.transactions.source)),
+  retryRpc('settlement transaction', () => creditcoin.getTransaction(evidence.transactions.settlement)),
 ]);
 
 assert.equal(getAddress(intentReceipt.from), driver, 'intent driver mismatch');
@@ -105,12 +106,14 @@ const verifier = new Contract(
   creditcoin,
 );
 
-const [station, intent, claimable, sessionProcessed] = await Promise.all([
+const station = await retryRpc('station metrics', () =>
   stationRegistry.station(creditcoinDeployment.station.stationId),
-  escrow.intent(evidence.intentId),
-  escrow.claimable(driver),
+);
+const intent = await retryRpc('settled intent', () => escrow.intent(evidence.intentId));
+const claimable = await retryRpc('claimable accounting', () => escrow.claimable(driver));
+const sessionProcessed = await retryRpc('session replay marker', () =>
   verifier.processedSessions(evidence.sessionId),
-]);
+);
 
 assert.equal(intent.state, 2n, 'intent is not settled');
 assert.equal(intent.paidAmount.toString(), evidence.settlement.stationPayment);
@@ -149,18 +152,50 @@ async function readJson(relativePath) {
   return JSON.parse(await readFile(path.resolve(repositoryRoot, relativePath), 'utf8'));
 }
 
+function createProvider(urls, chainId) {
+  const providers = urls.map((url, index) => {
+    const request = new FetchRequest(url);
+    request.timeout = RPC_TIMEOUT_MS;
+    return {
+      provider: new JsonRpcProvider(request, chainId, { staticNetwork: true }),
+      priority: index + 1,
+      stallTimeout: 2_000,
+      weight: 1,
+    };
+  });
+  if (providers.length === 1) return providers[0].provider;
+  return new FallbackProvider(providers, chainId, { quorum: 1 });
+}
+
+async function retryRpc(label, operation) {
+  let lastError;
+  for (let attempt = 1; attempt <= RPC_ATTEMPTS; attempt += 1) {
+    try {
+      const result = await operation();
+      if (result === null || result === undefined) throw new Error(`${label} is unavailable`);
+      return result;
+    } catch (error) {
+      lastError = error;
+      if (attempt === RPC_ATTEMPTS) break;
+      process.stderr.write(`RPC retry ${attempt}/${RPC_ATTEMPTS - 1}: ${label}\n`);
+      await new Promise((resolve) => setTimeout(resolve, attempt * 500));
+    }
+  }
+  throw new Error(`${label} failed after ${RPC_ATTEMPTS} attempts`, { cause: lastError });
+}
+
 async function assertChain(provider, expected, label) {
-  const network = await provider.getNetwork();
+  const network = await retryRpc(`${label} chain ID`, () => provider.getNetwork());
   assert.equal(network.chainId, BigInt(expected), `${label} chain ID mismatch`);
 }
 
 async function assertCode(provider, address) {
-  const code = await provider.getCode(address);
+  const code = await retryRpc(`runtime code at ${address}`, () => provider.getCode(address));
   assert.notEqual(code, '0x', `no runtime code at ${address}`);
 }
 
 async function assertReceipt(provider, hash, expectedStatus, label) {
-  const receipt = await provider.getTransactionReceipt(hash);
+  const receipt = await retryRpc(label, () => provider.getTransactionReceipt(hash));
   assert(receipt, `${label} receipt is unavailable: ${hash}`);
   assert.equal(receipt.status, expectedStatus, `${label} status mismatch: ${hash}`);
   return receipt;

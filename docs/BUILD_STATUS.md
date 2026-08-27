@@ -1,6 +1,6 @@
 # Build status
 
-Last updated: 2026-08-23
+Last updated: 2026-08-26
 
 ## Completed
 
@@ -46,26 +46,47 @@ Last updated: 2026-08-23
 - Final desktop and true 390 px device-emulated production screenshots were inspected. The 390 px
   document and viewport widths matched exactly, with no horizontal overflow.
 - Reproducible demo-video pipeline added: ten deck pages and three production dashboard views render
-  at 1920×1080; nine exact English narration scenes total 448 words; MiMo V2.5 TTS output is checked
+  at 1920×1080; nine exact English narration scenes total 412 words; MiMo V2.5 TTS output is checked
   scene-by-scene with MiMo V2.5 ASR word error rate; FFmpeg emits H.264/AAC with English subtitles.
 - Credential-free silent composition rendered and inspected successfully: 178.02 seconds, 1920×1080,
   H.264 video, 48 kHz stereo AAC, `mov_text` English subtitle track, and nine ordered scenes. Generated
   media is Git-ignored and is not presented as the final narrated demo.
-- Final MiMo V2.5 narration generated with the dedicated `Milo` voice. All nine scene WAVs passed MiMo
-  V2.5 ASR validation at 9.8% aggregate word error rate against an 18% maximum; one failed first take
-  was discarded and regenerated rather than weakening the threshold.
-- Final local upload candidate rendered at 175.72 seconds: 1920×1080 H.264 at 30 fps, 48 kHz mono AAC,
-  English `mov_text` subtitles, 8,748,819 bytes, and SHA-256
-  `bee0d67eaa32c8e201cfdeb5c8ac3a4a7bfdcb9961c1f743b2e43dd8409e84b7`. Audio peak is -0.8 dB,
-  and no silence interval of 1.5 seconds or longer remains. Three representative final frames were
-  visually inspected. The MP4 is Git-ignored pending human playback approval and upload.
+- Final MiMo V2.5 narration regenerated with the dedicated `Milo` voice after shortening the three
+  least intelligible scenes and adding explicit product-name pronunciation guidance. All nine source
+  WAVs passed MiMo V2.5 ASR validation at 5.4% aggregate word error rate against an 18% maximum.
+- The MiMo client now retries transient network, rate-limit, server, and response-body timeout failures;
+  `--tts-only --scene=<id>` permits a bad single take to be replaced without regenerating the full set.
+- Final local upload candidate rendered at 174.90 seconds: 1920×1080 H.264 at 30 fps, 48 kHz mono AAC,
+  English `mov_text` subtitles, 8,971,242 bytes, and SHA-256
+  `de10854284ac1f608828f9dac1b7ff0d3d5f9b485d2e803992f35b4f03e26162`. Integrated loudness is
+  -17.30 LUFS with a -1.42 dB true peak after per-scene normalization. No black interval of 0.3 seconds
+  or longer and no silence interval of 1.5 seconds or longer was detected; six representative frames
+  were visually inspected. The MP4 is Git-ignored pending human playback approval and upload.
 - The final time-compressed audio was extracted back out of all nine rendered video segments and sent
-  through MiMo V2.5 ASR again. Every post-processed segment passed independently at 8.2% aggregate WER;
-  the proof scene transcribed with 0.0% WER. This validates the audio judges will hear, not only the
+  through MiMo V2.5 ASR again. Every post-processed segment passed independently at 5.7% aggregate WER;
+  the settlement scene scored 1.8% and the proof scene 2.2%. This validates the audio judges will hear, not only the
   pre-render TTS WAV files.
 - DoraHacks BUIDL profile fields were prepared in copy-ready English. The project logo was derived
   from the dashboard's existing energy mark and visually inspected at the required 480 x 480 size;
   the optimized PNG is 74,731 bytes, safely below the 2 MB upload limit.
+- Hackathon readiness was re-audited against the current official event page and emerging public
+  competition. The dashboard now exposes project-owned live source, settlement, accounting, proof,
+  and replay evidence above the interactive workflow, with direct explorer links and a no-wallet path.
+- Added `pnpm judge:verify`: a credential-free command that re-reads all five deployed contract
+  bytecodes, flow receipts, settled intent, station metrics, and replay marker before running the local
+  vertical-slice integration tests.
+- The evidence verifier now bounds individual RPC waits, retries null and transient responses, avoids
+  burst-loading historical endpoints, and falls back from the official Creditcoin RPC to the public
+  Blockscout RPC. A live run recovered from transient Sepolia receipt misses and passed.
+- Removed the Next.js build-time Google Fonts dependency. Manrope and IBM Plex Mono are bundled from
+  Fontsource packages, so an unavailable font CDN no longer turns an otherwise reproducible build red.
+- Added generated Open Graph/Twitter presentation metadata, a 1200×630 social card, and a favicon for
+  stronger DoraHacks, chat, and social link previews.
+- Expanded contract coverage to 25 total repository tests: explicit alternate-session device nonce
+  replay, tariff mismatch, nondeterministic session ID, and incorrect exact-metering amount checks.
+- Visually inspected the updated 1920×1080 local dashboard hero and workflow captures. The evidence
+  strip remains legible, clearly labeled as project-owned historical testnet evidence, and does not
+  represent the local interactive path as live.
 
 ## In progress
 
@@ -117,23 +138,25 @@ Replay: `0xb9155eb1eaaf8bee27c1ce6fd55008442d17c006bfa65240f33513467161daff`
 
 ## Quality gates actually run
 
-Final credential-free run on 2026-08-22:
+Latest credential-free full run on 2026-08-26:
 
-| Gate                             | Result                                                                     |
-| -------------------------------- | -------------------------------------------------------------------------- |
-| `pnpm install --frozen-lockfile` | Passed; lockfile already current                                           |
-| `pnpm format:check`              | Passed                                                                     |
-| `pnpm lint`                      | Passed for root scripts and five workspace projects                        |
-| `pnpm typecheck`                 | Passed in strict mode                                                      |
-| `pnpm compile`                   | Passed; Solidity 0.8.28, Cancun target                                     |
-| `pnpm test`                      | Passed: 24 tests (5 Sepolia, 8 Creditcoin, 6 worker, 3 shared, 2 web)      |
-| `pnpm integration:local`         | Passed source success, target escrow settlement, and worker state machine  |
-| `pnpm build`                     | Passed; contracts, shared, worker, and Next.js production build            |
-| `pnpm secret:scan`               | Passed for 103 repository files                                            |
-| `pnpm audit --prod`              | No known vulnerabilities found                                             |
-| Responsive visual inspection     | Desktop and true 390 px device emulation inspected; no horizontal overflow |
+| Gate                             | Result                                                                            |
+| -------------------------------- | --------------------------------------------------------------------------------- |
+| `pnpm install --frozen-lockfile` | Passed; lockfile already current                                                  |
+| `pnpm format:check`              | Passed                                                                            |
+| `pnpm lint`                      | Passed for root scripts and five workspace projects                               |
+| `pnpm typecheck`                 | Passed in strict mode                                                             |
+| `pnpm compile`                   | Passed; Solidity 0.8.28, Cancun target                                            |
+| `pnpm test`                      | Passed: 25 tests (5 Sepolia, 9 Creditcoin, 6 worker, 3 shared, 2 web)             |
+| `pnpm integration:local`         | Passed source success, target escrow settlement, and worker state machine         |
+| `pnpm build`                     | Passed; contracts, shared, worker, and Next.js production build                   |
+| `pnpm secret:scan`               | Passed for 112 repository files                                                   |
+| `pnpm audit --prod`              | No known vulnerabilities found                                                    |
+| `pnpm judge:verify`              | Passed public live-evidence reads plus the credential-free local integration path |
+| Responsive visual inspection     | Updated 1920×1080 hero/workflow inspected; prior 390 px inspection retained       |
 
-The final `pnpm check` command completed successfully after the live evidence/UI changes.
+The final `pnpm check` command completed successfully after the 2026-08-26 evidence-first UI,
+reproducibility, metadata, and test changes. `pnpm audit --prod` also reported no known vulnerabilities.
 
 ## Commands actually run
 
@@ -154,6 +177,11 @@ pnpm testnet:gate2
 pnpm evidence:verify
 pnpm check
 pnpm audit --prod
+pnpm video:visuals
+pnpm video:audio -- --force --tts-only
+pnpm video:audio -- --asr-only
+pnpm video:render
+pnpm video:verify
 pnpm --filter @chargeproof/contracts-sepolia exec hardhat verify sourcify --network sepolia --creation-tx-hash <PUBLIC_DEPLOYMENT_TX> <PUBLIC_CONTRACT> <PUBLIC_OWNER>
 pnpm --filter @chargeproof/contracts-creditcoin exec hardhat verify blockscout --network creditcoinTestnet <PUBLIC_CONTRACT> <PUBLIC_CONSTRUCTOR_ARGS>
 npx --yes vercel@latest env add <PUBLIC_DEPLOYMENT_VARIABLE> production --value <PUBLIC_ADDRESS> --no-sensitive --yes
