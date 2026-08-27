@@ -37,7 +37,8 @@ Last updated: 2026-08-26
 - [x] Regenerate the upload candidate with truthful unaudited wording, clearer high-WER scenes,
       normalized loudness, refreshed 25-test deck visuals, and post-render ASR validation.
 - [x] Prepare the DoraHacks BUIDL profile copy and a validated 480 x 480 project logo under 2 MB.
-- [ ] Human playback review and video upload; add team identity before DoraHacks submission.
+- [x] Upload the final demo video and verify its YouTube URL without authentication.
+- [ ] Complete a final human playback review and add team identity before DoraHacks submission.
 
 ## Hackathon readiness hardening — 2026-08-26
 

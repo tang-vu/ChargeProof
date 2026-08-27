@@ -15,6 +15,8 @@ Official-example Gate 1 evidence remains clearly separated from ChargeProof-owne
 
 **Submission deck:** [ChargeProof-Deck.pdf](submission/ChargeProof-Deck.pdf)
 
+**Demo video:** [ChargeProof — Trustless Cross-Chain EV Charging Settlement](https://youtu.be/ezp9PUCCaRI)
+
 **Live demo:** [chargeproof-plum.vercel.app](https://chargeproof-plum.vercel.app) — configured for the
 project-owned Sepolia and Creditcoin Testnet deployments and seeded with a clearly labeled previous
 real settlement.

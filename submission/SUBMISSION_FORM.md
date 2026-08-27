@@ -42,7 +42,7 @@ the hackathon track set to `DePIN`.
 
 - GitHub/GitLab/Bitbucket: `https://github.com/tang-vu/ChargeProof`
 - Project website: `https://chargeproof-plum.vercel.app`
-- Demo video: `[YOUTUBE_UNLISTED_VIDEO_URL]`
+- Demo video: `https://youtu.be/ezp9PUCCaRI`
 
 ### Social links
 

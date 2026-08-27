@@ -66,6 +66,8 @@ Last updated: 2026-08-26
   through MiMo V2.5 ASR again. Every post-processed segment passed independently at 5.7% aggregate WER;
   the settlement scene scored 1.8% and the proof scene 2.2%. This validates the audio judges will hear, not only the
   pre-render TTS WAV files.
+- The final demo was uploaded to YouTube at `https://youtu.be/ezp9PUCCaRI`. Anonymous access returned
+  the expected ChargeProof title on 2026-08-27; a final end-to-end human playback review remains open.
 - DoraHacks BUIDL profile fields were prepared in copy-ready English. The project logo was derived
   from the dashboard's existing energy mark and visually inspected at the required 480 x 480 size;
   the optimized PNG is 74,731 bytes, safely below the 2 MB upload limit.
@@ -90,12 +92,11 @@ Last updated: 2026-08-26
 
 ## In progress
 
-- Human playback review and video upload, followed by team identity/contact and DoraHacks submission.
+- Human playback review, followed by team identity/contact and DoraHacks submission.
 
 ## Blocked
 
 - None for engineering/evidence. Source verification succeeded through Sourcify and Blockscout.
-- Video recording/upload requires a human recording session and media-hosting credentials.
 - Team identity/contact details and final DoraHacks submission require human input/login.
 - The MiMo key pasted into chat was treated as compromised and never used. A replacement key was read
   only from the Git-ignored local environment for the one-off interactive TTS/ASR run; no key value was

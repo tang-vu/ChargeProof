@@ -20,7 +20,7 @@
 | DePIN fit            | Metered EV infrastructure drives cross-chain payment and incentives                                         | Charger is a simulator; secure-element and OCPP/OCPI pilot remain roadmap work                                          |
 | Security             | Dual-chain validation, three replay domains, pull claims, immutable bindings, adversarial tests             | No independent audit; production use is explicitly blocked pending one                                                  |
 | Reproducibility      | Public source verification, clean CI, one-command credential-free judge verification                        | Public RPCs can be transient; verifier now retries and uses an explorer-backed fallback while failing closed            |
-| Product polish       | Responsive live dashboard, evidence-first UX, deck, narrated video candidate, social preview                | Final video hosting and team identity require human account access before submission                                    |
+| Product polish       | Responsive live dashboard, evidence-first UX, deck, hosted narrated demo, social preview                    | Team identity still requires human account access before submission                                                     |
 | Ecosystem value      | Reusable authenticated metered-receipt primitive and concrete CEIP roadmap                                  | No physical pilot or signed operator LOI is claimed                                                                     |
 
 ## Hackathon requirements
@@ -36,7 +36,7 @@
 | README                            | Problem, architecture, integration, evidence, security, setup, limitations, roadmap                             | `README.md`                                                 | Complete with Gate 2 explorer evidence         |
 | Project deck/PDF URL              | Ten-slide source and rendered 16:9 PDF                                                                          | `submission/ChargeProof-Deck.pdf`                           | Public through GitHub                          |
 | Hosted dashboard                  | Responsive evidence-first demo with truthful mode badge and historical proof                                    | `https://chargeproof-plum.vercel.app`                       | Public live-testnet deployment                 |
-| Demo video URL                    | Exact 2:50 script and recovery path ready                                                                       | `submission/VIDEO_SCRIPT.md`                                | Recording/upload human action pending          |
+| Demo video URL                    | 2:55 MiMo-narrated, post-render ASR-validated walkthrough                                                       | `https://youtu.be/ezp9PUCCaRI`                              | Hosted; anonymous access verified              |
 
 ## Product and track fit
 

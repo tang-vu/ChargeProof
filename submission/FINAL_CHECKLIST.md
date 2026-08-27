@@ -61,10 +61,11 @@
 - [x] Judging matrix and evidence schema
 - [x] Deck rendered to PDF
 - [x] Deck PDF uploaded to a stable public GitHub URL
-- [ ] Final MP4 playback reviewed and uploaded by a human
+- [x] Final MP4 uploaded to YouTube and anonymous-access URL verified
+- [ ] Final end-to-end human playback review completed
 - [x] Repository visibility confirmed public
 - [x] Live frontend deployed with authorized hosting credentials and live-testnet evidence
-- [ ] Team names, bios, video URL, and remaining human-only placeholders filled
+- [ ] Team names, bios, and remaining human-only placeholders filled
 - [ ] DoraHacks form reviewed and submitted before 2026-09-06 23:59 ET
 
 ## Truthfulness
