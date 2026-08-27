@@ -67,6 +67,7 @@
 - [x] Live frontend deployed with authorized hosting credentials and live-testnet evidence
 - [x] Required team and contact fields supplied directly to DoraHacks without publishing personal data
 - [x] DoraHacks form reviewed and submitted on 2026-08-27, before the deadline
+- [x] Public DoraHacks BUIDL URL recorded in repository submission materials
 
 ## Truthfulness
 

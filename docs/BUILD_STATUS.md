@@ -71,7 +71,9 @@ Last updated: 2026-08-26
   the expected ChargeProof title on 2026-08-27; a final end-to-end human playback review remains open.
 - The DoraHacks BUIDL profile, details, team, contact, DePIN track, and USC-specific submission fields
   were completed and submitted on 2026-08-27. Personal team/contact values are not copied into the
-  public repository. The public submission URL was not recorded and is therefore not claimed here.
+  public repository. The user-provided public submission URL is `https://dorahacks.io/buidl/48131`;
+  DoraHacks returned HTTP 405 to automated verification, so anonymous browser access is not
+  independently claimed here.
 - GitHub repository metadata was finalized through authenticated GitHub CLI: public description,
   Vercel homepage, and Attestcoin, Creditcoin, DePIN, EV charging, cross-chain, Solidity, Next.js, and
   hackathon topics are present.

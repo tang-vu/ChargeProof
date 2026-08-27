@@ -43,6 +43,7 @@ the hackathon track set to `DePIN`.
 - GitHub/GitLab/Bitbucket: `https://github.com/tang-vu/ChargeProof`
 - Project website: `https://chargeproof-plum.vercel.app`
 - Demo video: `https://youtu.be/ezp9PUCCaRI`
+- DoraHacks BUIDL: `https://dorahacks.io/buidl/48131`
 
 ### Social links
 
@@ -115,6 +116,7 @@ between the Sepolia receipt and Creditcoin settlement.
 - Project Deck/PDF URL:
   `https://github.com/tang-vu/ChargeProof/blob/main/submission/ChargeProof-Deck.pdf`
 - Demo Video URL: `https://youtu.be/ezp9PUCCaRI`
+- DoraHacks BUIDL URL: `https://dorahacks.io/buidl/48131`
 - Live Demo URL: `https://chargeproof-plum.vercel.app`
 - Sepolia source contract:
   `https://sepolia.etherscan.io/address/0x1F4E029B8e1FD4291fB96F64C3f12529F1f756fc`

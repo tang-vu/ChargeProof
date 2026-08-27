@@ -18,6 +18,8 @@ DoraHacks BUIDL submission was completed on 2026-08-27.
 
 **Demo video:** [ChargeProof — Trustless Cross-Chain EV Charging Settlement](https://youtu.be/ezp9PUCCaRI)
 
+**DoraHacks BUIDL:** [dorahacks.io/buidl/48131](https://dorahacks.io/buidl/48131)
+
 **Live demo:** [chargeproof-plum.vercel.app](https://chargeproof-plum.vercel.app) — configured for the
 project-owned Sepolia and Creditcoin Testnet deployments and seeded with a clearly labeled previous
 real settlement.

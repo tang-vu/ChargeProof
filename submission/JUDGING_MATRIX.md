@@ -37,6 +37,7 @@
 | Project deck/PDF URL              | Ten-slide source and rendered 16:9 PDF                                                                          | `submission/ChargeProof-Deck.pdf`                           | Public through GitHub                          |
 | Hosted dashboard                  | Responsive evidence-first demo with truthful mode badge and historical proof                                    | `https://chargeproof-plum.vercel.app`                       | Public live-testnet deployment                 |
 | Demo video URL                    | 2:55 MiMo-narrated, post-render ASR-validated walkthrough                                                       | `https://youtu.be/ezp9PUCCaRI`                              | Hosted; anonymous access verified              |
+| DoraHacks BUIDL                   | Submitted DePIN entry with profile, team, contact, and USC-specific fields                                      | `https://dorahacks.io/buidl/48131`                          | Submitted on 2026-08-27                        |
 
 ## Product and track fit
 

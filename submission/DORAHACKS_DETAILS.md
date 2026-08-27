@@ -9,6 +9,7 @@ credited back to the driver.
 
 - **Live demo:** [chargeproof-plum.vercel.app](https://chargeproof-plum.vercel.app)
 - **Demo video:** [Watch the 2:55 walkthrough](https://youtu.be/ezp9PUCCaRI)
+- **DoraHacks BUIDL:** [dorahacks.io/buidl/48131](https://dorahacks.io/buidl/48131)
 - **Source code:** [github.com/tang-vu/ChargeProof](https://github.com/tang-vu/ChargeProof)
 - **Pitch deck:** [ChargeProof Deck](https://github.com/tang-vu/ChargeProof/blob/main/submission/ChargeProof-Deck.pdf)
 
