@@ -20,7 +20,7 @@
 | DePIN fit            | Metered EV infrastructure drives cross-chain payment and incentives                                         | Charger is a simulator; secure-element and OCPP/OCPI pilot remain roadmap work                                          |
 | Security             | Dual-chain validation, three replay domains, pull claims, immutable bindings, adversarial tests             | No independent audit; production use is explicitly blocked pending one                                                  |
 | Reproducibility      | Public source verification, clean CI, one-command credential-free judge verification                        | Public RPCs can be transient; verifier now retries and uses an explorer-backed fallback while failing closed            |
-| Product polish       | Responsive live dashboard, evidence-first UX, deck, hosted narrated demo, social preview                    | Team identity still requires human account access before submission                                                     |
+| Product polish       | Responsive live dashboard, evidence-first UX, deck, hosted narrated demo, social preview                    | Final end-to-end human playback sign-off is not recorded in the repository                                              |
 | Ecosystem value      | Reusable authenticated metered-receipt primitive and concrete CEIP roadmap                                  | No physical pilot or signed operator LOI is claimed                                                                     |
 
 ## Hackathon requirements

@@ -56,5 +56,5 @@ Outputs are written under `submission/video/generated/`:
 - `ChargeProof-demo.mp4`: final upload candidate;
 - `video-report.json`: duration, SHA-256, and source metadata.
 
-Review the entire MP4 before uploading. The final upload and DoraHacks submission remain human-only
-actions because they require account access and editorial approval.
+Review the entire MP4 before uploading. Account-bound upload and DoraHacks submission are human-only
+actions; the current upload and submission were completed on 2026-08-27.

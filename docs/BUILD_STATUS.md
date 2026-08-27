@@ -61,13 +61,20 @@ Last updated: 2026-08-26
   `de10854284ac1f608828f9dac1b7ff0d3d5f9b485d2e803992f35b4f03e26162`. Integrated loudness is
   -17.30 LUFS with a -1.42 dB true peak after per-scene normalization. No black interval of 0.3 seconds
   or longer and no silence interval of 1.5 seconds or longer was detected; six representative frames
-  were visually inspected. The MP4 is Git-ignored pending human playback approval and upload.
+  were visually inspected. The generated MP4 remains Git-ignored; the upload is hosted separately on
+  YouTube.
 - The final time-compressed audio was extracted back out of all nine rendered video segments and sent
   through MiMo V2.5 ASR again. Every post-processed segment passed independently at 5.7% aggregate WER;
   the settlement scene scored 1.8% and the proof scene 2.2%. This validates the audio judges will hear, not only the
   pre-render TTS WAV files.
 - The final demo was uploaded to YouTube at `https://youtu.be/ezp9PUCCaRI`. Anonymous access returned
   the expected ChargeProof title on 2026-08-27; a final end-to-end human playback review remains open.
+- The DoraHacks BUIDL profile, details, team, contact, DePIN track, and USC-specific submission fields
+  were completed and submitted on 2026-08-27. Personal team/contact values are not copied into the
+  public repository. The public submission URL was not recorded and is therefore not claimed here.
+- GitHub repository metadata was finalized through authenticated GitHub CLI: public description,
+  Vercel homepage, and Attestcoin, Creditcoin, DePIN, EV charging, cross-chain, Solidity, Next.js, and
+  hackathon topics are present.
 - DoraHacks BUIDL profile fields were prepared in copy-ready English. The project logo was derived
   from the dashboard's existing energy mark and visually inspected at the required 480 x 480 size;
   the optimized PNG is 74,731 bytes, safely below the 2 MB upload limit.
@@ -92,12 +99,11 @@ Last updated: 2026-08-26
 
 ## In progress
 
-- Human playback review, followed by team identity/contact and DoraHacks submission.
+- Final end-to-end human playback review as a post-submission verification.
 
 ## Blocked
 
 - None for engineering/evidence. Source verification succeeded through Sourcify and Blockscout.
-- Team identity/contact details and final DoraHacks submission require human input/login.
 - The MiMo key pasted into chat was treated as compromised and never used. A replacement key was read
   only from the Git-ignored local environment for the one-off interactive TTS/ASR run; no key value was
   printed, serialized, committed, or sent to the browser.

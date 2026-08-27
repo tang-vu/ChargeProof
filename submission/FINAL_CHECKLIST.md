@@ -65,8 +65,8 @@
 - [ ] Final end-to-end human playback review completed
 - [x] Repository visibility confirmed public
 - [x] Live frontend deployed with authorized hosting credentials and live-testnet evidence
-- [ ] Team names, bios, and remaining human-only placeholders filled
-- [ ] DoraHacks form reviewed and submitted before 2026-09-06 23:59 ET
+- [x] Required team and contact fields supplied directly to DoraHacks without publishing personal data
+- [x] DoraHacks form reviewed and submitted on 2026-08-27, before the deadline
 
 ## Truthfulness
 

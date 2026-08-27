@@ -1,7 +1,7 @@
 # Submission form
 
-Copy-ready text for BUIDL CTC 2026 Fall. Replace bracketed placeholders only with verified public
-values before submission.
+Copy-ready record for the BUIDL CTC 2026 Fall submission. Personal team and contact values supplied
+directly to DoraHacks are intentionally not duplicated in this public repository.
 
 ## DoraHacks BUIDL Profile
 
@@ -47,11 +47,9 @@ the hackathon track set to `DePIN`.
 ### Social links
 
 - `https://github.com/tang-vu`
-- `[X_OR_TWITTER_PROFILE_URL]`
-- `[LINKEDIN_PROFILE_URL]`
 
-Use the public GitHub profile as the required verified social link. Add X and LinkedIn only when the
-real profile URLs are available; never create or invent accounts solely to fill optional rows.
+The public GitHub profile was used as the required verified social link. Optional accounts were not
+invented solely to fill additional rows.
 
 ## Project Name
 
@@ -116,7 +114,7 @@ between the Sepolia receipt and Creditcoin settlement.
 - GitHub Repository URL: `https://github.com/tang-vu/ChargeProof`
 - Project Deck/PDF URL:
   `https://github.com/tang-vu/ChargeProof/blob/main/submission/ChargeProof-Deck.pdf`
-- Demo Video URL: `[DEMO_VIDEO_URL]`
+- Demo Video URL: `https://youtu.be/ezp9PUCCaRI`
 - Live Demo URL: `https://chargeproof-plum.vercel.app`
 - Sepolia source contract:
   `https://sepolia.etherscan.io/address/0x1F4E029B8e1FD4291fB96F64C3f12529F1f756fc`
@@ -140,12 +138,8 @@ RPCs with `pnpm evidence:verify`.
 
 ## Team
 
-- Name: `[TEAM_MEMBER_NAME]`
-- Role: `[TEAM_ROLE]`
-- Short bio: `[TWO_SENTENCE_RELEVANT_BIO]`
-- Contact: `[CONTACT_HANDLE]`
-
-Repeat the block for additional team members.
+Required team identity and contact information was supplied directly in the DoraHacks form. It is not
+republished here because it is personal submission data rather than technical project evidence.
 
 ## Known Limitations
 

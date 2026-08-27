@@ -38,7 +38,8 @@ Last updated: 2026-08-26
       normalized loudness, refreshed 25-test deck visuals, and post-render ASR validation.
 - [x] Prepare the DoraHacks BUIDL profile copy and a validated 480 x 480 project logo under 2 MB.
 - [x] Upload the final demo video and verify its YouTube URL without authentication.
-- [ ] Complete a final human playback review and add team identity before DoraHacks submission.
+- [x] Complete the DoraHacks profile, team, contact, and track-specific fields and submit the BUIDL.
+- [ ] Complete a final end-to-end human playback review as a post-submission verification.
 
 ## Hackathon readiness hardening — 2026-08-26
 
@@ -53,7 +54,7 @@ Last updated: 2026-08-26
 - [x] Add Open Graph/Twitter metadata, a generated 1200×630 social card, and an application icon.
 - [x] Expand adversarial coverage for reused device nonces, tariff mismatch, nondeterministic session
       IDs, and incorrect metering math.
-- [ ] Human-review and publicly host the final MP4, fill team identity/contact, and submit DoraHacks.
+- [x] Publicly host the final MP4, fill the required private form fields, and submit DoraHacks.
 
 ## Architecture decisions
 

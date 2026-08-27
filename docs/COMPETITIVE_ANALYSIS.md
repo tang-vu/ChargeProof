@@ -29,10 +29,10 @@ the successful source and settlement receipts, the mined replay revert, settled 
 metrics before it runs the explicitly local integration path. ChargeProof's strongest comparative advantage is
 therefore its complete project-owned live vertical slice and DePIN-specific physical-device trust model.
 
-The material competitive risk is presentation, not implementation depth: until the final video is publicly
-hosted and the DoraHacks profile is complete, a technically shallower project with a one-click submission can be
-easier to judge. The dashboard's evidence-first strip, social preview, and no-key verifier reduce that risk, but
-they do not replace the remaining human upload and submission actions.
+The material competitive risk was presentation rather than implementation depth. That risk is now reduced: the
+final video is hosted, the DoraHacks BUIDL has been submitted, and the dashboard's evidence-first strip, social
+preview, and no-key verifier give judges a short path into the deeper implementation. A final human playback
+sign-off remains an operational follow-up rather than a submission blocker.
 
 The MVP is intentionally narrow: one station, one tariff model, one virtual hardware device, Sepolia as the
 source, and Creditcoin Testnet as execution chain. It does not claim physical-energy truth; the authorized

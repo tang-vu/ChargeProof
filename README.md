@@ -11,7 +11,8 @@ escrow is credited back to the driver.
 **Track:** DePIN<br>
 **Status:** the project-owned Sepolia-to-Creditcoin Gate 2 flow is live and explorer-verifiable. A
 real Attestcoin proof settled one funded intent, and a mined replay attempt reverted as designed.
-Official-example Gate 1 evidence remains clearly separated from ChargeProof-owned evidence.
+Official-example Gate 1 evidence remains clearly separated from ChargeProof-owned evidence. The
+DoraHacks BUIDL submission was completed on 2026-08-27.
 
 **Submission deck:** [ChargeProof-Deck.pdf](submission/ChargeProof-Deck.pdf)
 
