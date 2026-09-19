@@ -32,3 +32,9 @@ deployments/*.tmp.json
 Thumbs.db
 .idea/
 .vscode/
+
+# AI assistant artifacts
+.devin/
+.claude/settings.local.json
+.claude/scheduled_tasks.lock
+NUL
